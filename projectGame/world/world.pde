@@ -17,6 +17,7 @@ void setup() {
   map = new Map();
   hole = new Hole();
   running = true;
+  map.read();
   setWorld();
 
   
@@ -26,6 +27,7 @@ void draw() {
   if ( running ) {
     background(87);
     mcJoe.draw();
+    hole.draw();
     drawWorld();
   }
 } // draw()
