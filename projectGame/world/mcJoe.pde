@@ -1,18 +1,12 @@
-class Player {
+class Player extends GameObject {
 
-  PVector pos;      // current (x,y) position of player
-  int max_x, max_y; // maximum x and y values for the player
-  color mycolor;    // the color for drawing the player
-  int d = 30;       // diameter of the player
-
+  int d = grid_size;       // diameter of the player
 
   /** Player constructor **/
-  Player( int x0, int y0, int c0 ) {
-    max_x = x0;
-    max_y = y0;
-    mycolor = color( c0 );
+  Player() {
+    super( #000099 );
     ellipseMode( CORNER );
-    pos = new PVector( 0.0 + 5, max_y-d-5 ); // start bottom left corner
+    pos = new PVector( 0, 0 ); // start bottom left corner
   }
 
   /** returns the player's current (x,y) position **/
@@ -36,16 +30,16 @@ class Player {
   void kick( int direction ) {
     switch( direction ) {
     case NORTH:
-      pos.y -= d/3;
+      pos.y -= 20;
       break;
     case SOUTH:
-      pos.y += d/3;
+      pos.y += 20;
       break;
     case WEST:
-      pos.x -= d/3;
+      pos.x -= 20;
       break;
     case EAST:
-      pos.x += d/3;
+      pos.x += 20;
       break;
     } // switch
   } // kick()

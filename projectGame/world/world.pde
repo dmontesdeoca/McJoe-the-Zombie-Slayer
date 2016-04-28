@@ -2,16 +2,20 @@ static final int NORTH = 0;
 static final int WEST  = 1;
 static final int SOUTH = 2;
 static final int EAST  = 3;
+static final int grid_size = 20;
 
-int numObstacle = 10;
-PVector[] obstacle = new PVector[numObstacle];
+ArrayList<PVector> obstacles = new ArrayList<PVector>();
 
 boolean running; // flag set to true while the game is running
 Player mcJoe; // player (human)
+Map map;
+Hole hole;
 
 void setup() {
   size( 500,500 );
-  mcJoe = new Player( 500, 500, #000099 );
+  mcJoe = new Player();
+  map = new Map();
+  hole = new Hole();
   running = true;
   setWorld();
 
@@ -54,13 +58,28 @@ void keyReleased() {
 
 /** set obstacles **/
 void setWorld(){  
-  for(int x = 0; x < numObstacle; x++)
-  obstacle[x] = new PVector( ((int)random(0,500 - mcJoe.d)), ((int)random(0,500 - mcJoe.d)) );
+  for ( int x = 0; x < map.getMaxX(); x++ ) {
+    for ( int y = 0; y < map.getMaxY(); y++ ) {
+      String value = map.getValue( x, y );
+      switch ( value ) {
+        case "1":
+          obstacles.add( new PVector( x * grid_size, y * grid_size ) );
+          break;
+        case "2":
+          mcJoe.reset( x * grid_size, y * grid_size );
+          break;
+        case "3":
+          hole.reset( x * grid_size, y * grid_size );
+          break;
+      }
+    }
+  }
+  
 } // setWorld()
 
 void drawWorld(){
   stroke( #000000 );
   fill( #000000 );
-  for(int i = 0; i < numObstacle; i++)                
-    rect( obstacle[i].x, obstacle[i].y, mcJoe.d, mcJoe.d );
+  for(int i = 0; i < obstacles.size(); i++)                
+    rect( obstacles.get( i ).x, obstacles.get( i ).y, mcJoe.d, mcJoe.d );
 } // drawWorld()
