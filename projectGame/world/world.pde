@@ -4,16 +4,19 @@ static final int SOUTH = 2;
 static final int EAST  = 3;
 static final int grid_size = 20;
 
+int frame = 0;
+
 ArrayList<PVector> obstacles = new ArrayList<PVector>();
 
 boolean running; // flag set to true while the game is running
 Player mcJoe; // player (human)
+Zombie zombie;
 Map map;
 Hole hole;
 
 void setup() {
+  frameRate( 30 );
   size( 500,500 );
-  mcJoe = new Player();
   map = new Map();
   hole = new Hole();
   running = true;
@@ -27,6 +30,7 @@ void draw() {
   if ( running ) {
     background(87);
     mcJoe.draw();
+    zombie.draw();
     hole.draw();
     drawWorld();
   }
@@ -68,10 +72,15 @@ void setWorld(){
           obstacles.add( new PVector( x * grid_size, y * grid_size ) );
           break;
         case "2":
+          mcJoe = new Player( map );
           mcJoe.reset( x * grid_size, y * grid_size );
           break;
         case "3":
           hole.reset( x * grid_size, y * grid_size );
+          break;
+        case "4":
+          zombie = new Zombie( map );
+          zombie.reset( x * grid_size, y * grid_size );
           break;
       }
     }

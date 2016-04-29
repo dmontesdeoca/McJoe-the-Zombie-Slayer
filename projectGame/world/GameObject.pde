@@ -12,6 +12,29 @@ class GameObject {
      state = DUNGEON;
    }
    
+   /** Game Object moves to the direction given **/
+  void kick( int direction ) {
+    switch( direction ) {
+      case NORTH:
+        pos.y -= grid_size;
+        break;
+      case SOUTH:
+        pos.y += grid_size;
+        break;
+      case WEST:
+        pos.x -= grid_size;
+        break;
+      case EAST:
+        pos.x += grid_size;;
+        break;
+      } // switch
+  } // kick()
+   
+   /** returns the game object's current (x,y) position **/
+   PVector getPos() {
+     return( pos );
+   } // getPos()
+     
    void setState( int state ) {
      this.state = state;
    }

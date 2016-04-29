@@ -9,11 +9,6 @@ class Hole extends GameObject {
     pos = new PVector( 0, 0 ); // start bottom left corner
   }
 
-  /** returns the player's current (x,y) position **/
-  PVector getPos() {
-    return( pos );
-  } // getPos()
-
   void draw() {
     fill(mycolor);
     stroke( mycolor );
