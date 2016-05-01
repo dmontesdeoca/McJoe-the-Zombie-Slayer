@@ -22,7 +22,9 @@ class Player extends GameObject {
     strokeWeight( 3 );
     ellipse( pos.x, pos.y, d, d );
   } // draw()
-
+ /**** returns the current location of McJoe***/
+ PVector getLoc(){ return pos; }
+ 
   void kick( int direction ) {
     switch( direction ) {
       case NORTH:

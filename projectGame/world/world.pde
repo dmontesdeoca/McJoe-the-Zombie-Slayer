@@ -30,7 +30,7 @@ void draw() {
   if ( running ) {
     background(87);
     mcJoe.draw();
-    zombie.draw();
+    zombie.draw(mcJoe.getLoc());  // send the location PVECTOR of mcJoe
     hole.draw();
     drawWorld();
   }

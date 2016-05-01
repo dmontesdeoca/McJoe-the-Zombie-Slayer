@@ -3,7 +3,7 @@ class Zombie extends GameObject {
   
   int d = grid_size;       // diameter of the Zombie
   int frame = 0;
-  
+  String move;
   Map map; 
   
   Zombie( Map map ) {
@@ -18,12 +18,20 @@ class Zombie extends GameObject {
     return( d );
   } // getDiameter()
 
-  void draw() {
+  void draw(PVector player) {
     fill(mycolor);
     stroke( mycolor );
     strokeWeight( 3 );
     ellipse( pos.x, pos.y, d, d );
-    if ( frame % 30 == 0 ) {
+    
+    // FIX..CHECKSIGHT FUNCTION....if mcjoe is in sight chase else make a random move
+    if(checkSight(player)){
+      // FIX...CHASE FUNCTION
+      if( frame % 15 == 0){
+        chase(move);
+      }
+    }
+    else if ( frame % 15 == 0 ) { // i changed 30 into 15 to make it a bit faster
       makeRandomMove();
     }
     frame++;
@@ -55,4 +63,14 @@ class Zombie extends GameObject {
         break;
     } // switch
   }
+}
+// FIX CHECK TO SEE IF THE ZOMBIE CAN SEE THE PLAYER KEEPING IN MIND OF THE WALLS
+boolean checkSight(PVector location){
+//FIX cant get pos. this.pos isnt working check later
+  return false;
+}
+
+// FIX MAKE A FUNCTION TO CHASE THE PLAYER WITHOUT GOING THROUGH WALLS
+void chase(String move){
+
 }
