@@ -3,6 +3,7 @@ static final int WEST  = 1;
 static final int SOUTH = 2;
 static final int EAST  = 3;
 static final int grid_size = 20;
+PImage screen;
 
 int frame = 0;
 
@@ -28,11 +29,11 @@ void setup() {
 
 void draw() {
   if ( running ) {
-    background(87);
+    //background(87);
+    drawWorld();
     mcJoe.draw();
     zombie.draw();
     hole.draw();
-    drawWorld();
   }
 } // draw()
 
@@ -89,8 +90,12 @@ void setWorld(){
 } // setWorld()
 
 void drawWorld(){
-  stroke( #000000 );
+  screen = loadImage( "../Graphics/map/mapOne.jpg" );
+  /*stroke( #000000 );
   fill( #000000 );
   for(int i = 0; i < obstacles.size(); i++)                
     rect( obstacles.get( i ).x, obstacles.get( i ).y, mcJoe.d, mcJoe.d );
+  */  
+    imageMode(CORNERS);
+    image(screen, 0, 0, 500, 500); 
 } // drawWorld()

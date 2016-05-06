@@ -8,7 +8,7 @@ String[][] mapArr;
 /** map constructor where we will create a reader to the file**/
   Map() {
     // Open the file from the createWriter() example
-    reader = createReader("../Maps/mapOne.stdin");    
+     reader = createReader("../Maps/map1.stdin");
   }
  
 void read() {
