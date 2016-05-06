@@ -18,26 +18,19 @@ class Zombie extends GameObject {
     return( d );
   } // getDiameter()
 
-  void draw(PVector player) {
+  void draw() {
     fill(mycolor);
     stroke( mycolor );
     strokeWeight( 3 );
     ellipse( pos.x, pos.y, d, d );
     
-    // FIX..CHECKSIGHT FUNCTION....if mcjoe is in sight chase else make a random move
-    if(checkSight(player)){
-      // FIX...CHASE FUNCTION
-      if( frame % 15 == 0){
-        chase(move);
-      }
-    }
-    else if ( frame % 15 == 0 ) { // i changed 30 into 15 to make it a bit faster
+   if ( frame % 15 == 0 ) { // i changed 30 into 15 to make it a bit faster
       makeRandomMove();
     }
     frame++;
   } // draw()
   
-  void makeRandomMove() {
+  void makeRandomMove() { // call make move in the world
     int direction = ( int ) random( 0, 4 );
     
     switch( direction ) {
@@ -64,6 +57,7 @@ class Zombie extends GameObject {
     } // switch
   }
 }
+
 // FIX CHECK TO SEE IF THE ZOMBIE CAN SEE THE PLAYER KEEPING IN MIND OF THE WALLS
 boolean checkSight(PVector location){
 //FIX cant get pos. this.pos isnt working check later
@@ -72,5 +66,10 @@ boolean checkSight(PVector location){
 
 // FIX MAKE A FUNCTION TO CHASE THE PLAYER WITHOUT GOING THROUGH WALLS
 void chase(String move){
+
+}
+
+// FIX MAKE A FUNCTION SO ZOMBIES CAN KEEP AWAY FROM EACH OTHER. MOVE IN OPPOSITE DIRECTIONS 
+void avoid(){
 
 }

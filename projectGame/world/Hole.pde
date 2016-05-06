@@ -1,8 +1,6 @@
-
 class Hole extends GameObject {
   int d = grid_size;       // diameter of the player
 
-  /** Player constructor **/
   Hole() {
     super( #000000 );
     ellipseMode( CORNER );
@@ -18,4 +16,4 @@ class Hole extends GameObject {
   
   
 
-} // player class
+} // Hole class

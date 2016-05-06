@@ -1,4 +1,3 @@
-
 static final int DUNGEON = 0;
 static final int BATTLE = 1;
 

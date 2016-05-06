@@ -1,6 +1,6 @@
 class Player extends GameObject {
 
-  int d = grid_size;       // diameter of the player
+  int d = grid_size;       // diameter of the player (McJoe)
   Map map;
 
   /** Player constructor **/
@@ -22,7 +22,7 @@ class Player extends GameObject {
     strokeWeight( 3 );
     ellipse( pos.x, pos.y, d, d );
   } // draw()
- /**** returns the current location of McJoe***/
+ /*** returns the current location of McJoe ***/
  PVector getLoc(){ return pos; }
  
   void kick( int direction ) {
