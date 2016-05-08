@@ -1,0 +1,11 @@
+0 - Free Space
+1 - Wall
+2 - McJoe
+3 - Hole
+4 - Coin
+5 - Heart
+6 - Zombie Male
+7 - Zombie Female
+8 - Zombie Mutated M
+9 - Zombie Mutated F
+10 - Zombie Queen
