@@ -1,4 +1,20 @@
-mcjoe green round - add more detail
-zombie blueish m/f square
-zombie mutated purplish m/f square
-zombie Queen red pink orangish square
+main screen to choose weapon then play
+
+make the screen with McJoe the zombie slayer on the top
+
+and create buttons on processing for the weapons and when they are clicked set it to that weapon for the rest of the game. And start game into the first level.
+
+
+battle screen
+just one map
+
+body for the 5 zombies
+-zombie male/female
+-mutated male/female
+-zombie queen
+
+four mcjoes with body with the weapons
+-sword
+-bow and arrow
+-gun
+-bat
