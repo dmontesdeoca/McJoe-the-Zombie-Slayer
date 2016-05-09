@@ -38,7 +38,11 @@ void draw() {
       drawWorld();
     }
     else {
-      background(87);
+       // background(10); //battle screen will go here!
+        screen = loadImage( "../Graphics/battle/battle.png" );
+        //background(screen);
+        imageMode(CORNERS);
+        image(screen, 0, 0, 500, 500); 
     }
     mcJoe.draw();
     zombie.draw();

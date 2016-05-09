@@ -8,13 +8,6 @@ and create buttons on processing for the weapons and when they are clicked set i
 battle screen
 just one map
 
-body for the 5 zombies
--zombie male/female
--mutated male/female
--zombie queen
-
-four mcjoes with body with the weapons
--sword
--bow and arrow
--gun
--bat
+rest of maps
+4 more regular maps, add bones and skulls as it progresses
+as it progres more
