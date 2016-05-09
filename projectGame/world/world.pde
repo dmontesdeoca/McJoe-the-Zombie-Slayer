@@ -7,13 +7,14 @@ PImage screen;
 
 int frame = 0;
 
-ArrayList<PVector> obstacles = new ArrayList<PVector>();
+//ArrayList<PVector> obstacles = new ArrayList<PVector>();
 
 boolean running; // flag set to true while the game is running
 Player mcJoe; // player (human)
 Zombie zombie;
 Map map;
 Hole hole;
+int state;
 
 void setup() {
   frameRate( 30 );
@@ -22,6 +23,9 @@ void setup() {
   hole = new Hole();
   running = true;
   map.read();
+  
+  mcJoe = new Player( map );
+  zombie = new Zombie( map );
   setWorld();
 
   
@@ -29,11 +33,17 @@ void setup() {
 
 void draw() {
   if ( running ) {
-    //background(87);
-    drawWorld();
+    if ( state == DUNGEON ) {
+      checkCollision();
+      drawWorld();
+    }
+    else {
+      background(87);
+    }
     mcJoe.draw();
     zombie.draw();
     hole.draw();
+    frame++;
   }
 } // draw()
 
@@ -42,46 +52,73 @@ void draw() {
      and when q or Q is pressed it will quit the game **/
 
 void keyReleased() {
-  if ( key == CODED ) {
-    switch ( keyCode ) {
-    case UP:
-      mcJoe.kick( NORTH );
-      break;
-    case DOWN:
-      mcJoe.kick( SOUTH );
-      break;
-    case LEFT:
-      mcJoe.kick( WEST );
-      break;
-    case RIGHT:
-      mcJoe.kick( EAST );
-      break;
+  if ( state == DUNGEON ) {
+    if ( key == CODED ) {
+      switch ( keyCode ) {
+      case UP:
+        mcJoe.kick( NORTH );
+        break;
+      case DOWN:
+        mcJoe.kick( SOUTH );
+        break;
+      case LEFT:
+        mcJoe.kick( WEST );
+        break;
+      case RIGHT:
+        mcJoe.kick( EAST );
+        break;
+      }
     }
-  }
-  else if (( key == 'q' ) || ( key == 'Q' )) {
-    exit();
+    else if (( key == 'q' ) || ( key == 'Q' )) {
+      exit();
+    }
   }
 } // keyReleased()
 
+void keyPressed() {
+  if ( state == BATTLE ) {
+      if ( key == CODED ) {
+        switch ( keyCode ) {
+        case UP:
+          mcJoe.kick( NORTH );
+          break;
+        case DOWN:
+          mcJoe.kick( SOUTH );
+          break;
+        case LEFT:
+          mcJoe.kick( WEST );
+          break;
+        case RIGHT:
+          mcJoe.kick( EAST );
+          break;
+        }
+      }
+      else if (( key == 'q' ) || ( key == 'Q' )) {
+        exit();
+      }
+  }
+}
+
 /** set obstacles **/
-void setWorld(){  
+void setWorld(){ 
+  state = DUNGEON;
   screen = loadImage( "../Graphics/map/mapOne.jpg" );
   for ( int x = 0; x < map.getMaxX(); x++ ) {
     for ( int y = 0; y < map.getMaxY(); y++ ) {
       String value = map.getValue( x, y );
       switch ( value ) {
+        /*
         case "1":
           obstacles.add( new PVector( x * grid_size, y * grid_size ) );
           break;
+          */
         case "2":
-          mcJoe = new Player( map );
           mcJoe.reset( x * grid_size, y * grid_size );
           break;
         case "3":
           hole.reset( x * grid_size, y * grid_size );
           break;
-        case "4":
-          zombie = new Zombie( map );
+        case "6":
           zombie.reset( x * grid_size, y * grid_size );
           break;
       }
@@ -89,6 +126,16 @@ void setWorld(){
   }
   
 } // setWorld()
+
+void setBattle() {
+  state = BATTLE;
+  mcJoe.setState( BATTLE );
+  zombie.setState( BATTLE );
+  hole.setState( BATTLE );
+  
+  mcJoe.reset( 125, 400 );
+  zombie.reset( 375, 400 );
+}
 
 void drawWorld(){
   /*stroke( #000000 );
@@ -99,3 +146,36 @@ void drawWorld(){
     imageMode(CORNERS);
     image(screen, 0, 0, 500, 500); 
 } // drawWorld()
+
+void checkCollision() {
+  
+  for ( int direction = 0; direction < 4; direction++ ) {
+    switch( direction ) {
+      case NORTH:
+        if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "6" ) ) {
+          setBattle();
+          return;
+        }
+        break;
+      case SOUTH:
+        if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "6" ) ) {
+          setBattle();
+          return;
+        }
+        break;
+      case WEST:
+        if ( map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "6" ) ) {
+          setBattle();
+          return;
+        }
+        break;
+      case EAST:
+        if ( map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "6" ) ) {
+          setBattle();
+          return;
+        }
+        break;
+      } // switch 
+  }
+  
+}
