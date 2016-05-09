@@ -1,5 +1,6 @@
 static final int DUNGEON = 0;
 static final int BATTLE = 1;
+static final int MAIN = 2;
 
 class GameObject {
    protected PVector pos;      // current (x,y) position of object
