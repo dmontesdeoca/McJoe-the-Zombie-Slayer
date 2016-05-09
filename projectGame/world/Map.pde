@@ -48,5 +48,5 @@ void read() {
 int getMaxX(){ return maxX;}
 int getMaxY(){ return maxY;}
 String getValue(int x, int y){ return mapArr[y][x];}
-
+String[][] getMapArray() { return mapArr; }
 } // end of Map class

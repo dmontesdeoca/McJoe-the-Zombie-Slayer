@@ -65,6 +65,7 @@ void keyReleased() {
 
 /** set obstacles **/
 void setWorld(){  
+  screen = loadImage( "../Graphics/map/mapOne.jpg" );
   for ( int x = 0; x < map.getMaxX(); x++ ) {
     for ( int y = 0; y < map.getMaxY(); y++ ) {
       String value = map.getValue( x, y );
@@ -90,7 +91,6 @@ void setWorld(){
 } // setWorld()
 
 void drawWorld(){
-  screen = loadImage( "../Graphics/map/mapOne.jpg" );
   /*stroke( #000000 );
   fill( #000000 );
   for(int i = 0; i < obstacles.size(); i++)                
