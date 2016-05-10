@@ -16,14 +16,11 @@ Map map;
 Hole hole;
 int state;
 
-//for the main screen buttons *******************************************************************************************************************
-int swordX, swordY; 
-int bowX, bowY; 
-int gunX, gunY;     
-int batX, batY;  // position of the buttons
+//for the main screen buttons 
+int swordX, swordY, bowX, bowY, gunX, gunY, batX, batY;  // position of the buttons
 int buttonSize = 100;     // diameter of button
 color swordColor, bowColor, gunColor, batColor;
-color /*swordHighlight, bowHighlight,*/ highLight;
+color highLight;
 boolean sword = false;
 boolean bow = false;
 boolean gun = false;
@@ -37,6 +34,9 @@ void setup() {
   size( 500,500 );
   state = MAIN;
   running = true;
+  setWorld(); // here set the main page, create the buttons
+
+ //moved most to setWorld
  /* frameRate( 30 );
   size( 500,500 );
   map = new Map();
@@ -45,15 +45,13 @@ void setup() {
   map.read();
   
   mcJoe = new Player( map );
-  zombie = new Zombie( map );*/ // moved to setWorld
-  setWorld(); // here set the main page, create the buttons
-  
+  zombie = new Zombie( map );*/ // moved to setWorld  
 } // setup()
 
 void draw() {
   if ( running ) {
     
-    if(state == MAIN){
+    if( state == MAIN ){
        updateMouse(mouseX, mouseY);
       if(weaponPicked){ // if a weapon was clicked set state to dungeon and set world accordingly
         state = DUNGEON;
@@ -68,7 +66,7 @@ void draw() {
       hole.draw();
       frame++;
     }
-    else {
+    else if ( state == BATTLE ){
        // background(10); //battle screen will go here!
         screen = loadImage( "../Graphics/battle/battle.png" );
         imageMode(CORNERS);
