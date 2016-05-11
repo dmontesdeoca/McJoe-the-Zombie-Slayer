@@ -1,3 +1,12 @@
+static final int SWORD = 1;
+static final int BOW = 2;
+static final int GUN = 3;
+static final int BAT = 4;
+static final int ZOMBIE_F = 5;
+static final int ZOMBIE_M = 6;
+static final int ZOMBIE_MF = 7;
+static final int ZOMBIE_MM = 8;
+static final int ZOMBIE_Q = 9;
 
 class GameCharacter extends GameObject {
   protected Map map;
@@ -9,15 +18,16 @@ class GameCharacter extends GameObject {
   private PVector beforeJump;
   private PVector vel;
   
-  GameCharacter( Map map, String ID, PImage charImg ) {
+  GameCharacter( Map map, String ID, /*PImage charImg*/ int character) {
     super();
     this.ID = ID;
     this.map = map;
-    this.charImg = charImg;
+    //this.charImg = charImg;
     fall = false;
     jump = false;
     beforeJump = new PVector();
     vel = new PVector();
+    chooseCharacter(character);
   }
   
   void kick( int direction ) {
@@ -104,4 +114,37 @@ class GameCharacter extends GameObject {
       }
     }
   } // draw()
+  
+  //choose the character
+void chooseCharacter(int charImage){
+    if(charImage == SWORD){
+        charImg = loadImage("../Graphics/battle/sword.png");
+    }
+    else if(charImage == BOW){
+             charImg = loadImage("../Graphics/battle/bowArrow.png");
+    }
+         else if(charImage == GUN){
+                charImg = loadImage("../Graphics/battle/gun.png");
+         }
+          else if(charImage == BAT){
+                  charImg = loadImage("../Graphics/battle/bat.png");
+           }
+                else if(charImage == ZOMBIE_F){
+                        charImg = loadImage("../Graphics/battle/zombieFemale.png");
+                }
+                      else if(charImage == ZOMBIE_M){
+                              charImg = loadImage("../Graphics/battle/zombieMale.png");
+                      }
+                            else if(charImage == ZOMBIE_MF){
+                                    charImg = loadImage("../Graphics/battle/zombieFemaleM.png");
+                            }
+                                  else if(charImage == ZOMBIE_MM){
+                                          charImg = loadImage("../Graphics/battle/zombieMaleM.png");
+                                  }
+                                        else if(charImage == ZOMBIE_Q){
+                                                charImg = loadImage("../Graphics/battle/zombieQueen.png");
+                                        }
+    
+    
+  }
 }

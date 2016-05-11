@@ -1,4 +1,3 @@
-
 class Zombie extends GameCharacter {
   
   //int d = grid_size;       // diameter of the Zombie
@@ -7,7 +6,7 @@ class Zombie extends GameCharacter {
   String move;
   
   Zombie( Map map ) {
-    super( map, "6", loadImage("../Graphics/battle/zombieMale.png") );
+    super( map, "6", ZOMBIE_F );
     mapArr = new String[map.getMaxX()][map.getMaxY()];
     arrayCopy( map.getMapArray(), mapArr );
     ellipseMode( CORNER );
