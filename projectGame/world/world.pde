@@ -2,9 +2,9 @@ static final int NORTH = 0;
 static final int WEST  = 1;
 static final int SOUTH = 2;
 static final int EAST  = 3;
-static final int grid_size = 28; // changed the gridsize and the width and length to make it bigger //  20,  28,  40
-static final int WIDTH = 700;                                                                       // 500, 700, 1000
-static final int LENGTH = 700;                                                                      // 500, 700, 1000
+static final int grid_size = 28;         //  20,  28,  40
+static final int WIDTH = 700;            // 500, 700, 1000  when changing size make sure to change size() in setup
+static final int LENGTH = 700;           // 500, 700, 1000  
 PImage screen;
 
 int frame = 0;
@@ -52,6 +52,7 @@ void draw() {
       checkCollision();
       drawWorld();
       mcJoe.draw();
+      zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       zombie.draw();
       hole.draw();
       frame++;
@@ -169,7 +170,7 @@ void setBattle() {
   zombie.setState( BATTLE );
   hole.setState( BATTLE );
   
- /* mcJoe.reset( 125 * 2, 400 * 2 ); // fix it so it can grow when we change the size of the game  *****************************************************************
+ /* mcJoe.reset( 125 * 2, 400 * 2 ); 
   zombie.reset( 375 * 2, 400 *2 );*/
   
   mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );

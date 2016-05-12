@@ -39,7 +39,6 @@ void read() {
 
      for(int j = 0; j < maxX; j++){
        mapArr[i][j] = piece[j];
-       //System.out.println(mapArr[i][j]);
      }
    }
    

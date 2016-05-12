@@ -1,9 +1,9 @@
 class Zombie extends GameCharacter {
-  
-  //int d = grid_size;       // diameter of the Zombie
   String[][] mapArr;
   int frame = 0;
   String move;
+  boolean inSight = false;
+  PVector mcJoeLocation; // mcJoes current location
   
   Zombie( Map map ) {
     super( map, "6", ZOMBIE_F );
@@ -14,12 +14,16 @@ class Zombie extends GameCharacter {
   }
   
   void draw() {
-   super.draw();
-   
-   if ( frame % 10 == 0 ) { // i changed 30 into 15 to make it a bit faster
-      makeRandomMove();
-   }
-   frame++;
+     super.draw();
+     if ( frame % 10 == 0 ) {
+         if(inSight){
+             chase();
+         }
+         else{
+              makeRandomMove();         
+         }
+     }
+     frame++;
   } // draw()
   
   void makeRandomMove() { // call make move in the world
@@ -28,18 +32,38 @@ class Zombie extends GameCharacter {
     super.kick( direction );
   }
 
-  // FIX CHECK TO SEE IF THE ZOMBIE CAN SEE THE PLAYER KEEPING IN MIND OF THE WALLS
-  boolean checkSight(PVector location){
-  //FIX cant get pos. this.pos isnt working check later
-    return false;
+
+  void checkSight(PVector location){
+    mcJoeLocation = new PVector(location.x, location.y);
+     if((mcJoeLocation.x > pos.x - (grid_size * 5) && mcJoeLocation.x < pos.x + (grid_size * 5))  && 
+        (mcJoeLocation.y > pos.y - (grid_size * 5) && mcJoeLocation.y < pos.y + (grid_size * 5))){
+       inSight = true;
+     }
+     else
+        inSight = false;
+        
   }
   
-  // FIX MAKE A FUNCTION TO CHASE THE PLAYER WITHOUT GOING THROUGH WALLS
-  void chase(String move){
   
+ // if mcJoe is in the zombies sight, the zombie will chase mcJoe
+  void chase(){
+    // here move accordingly to mcJoes current location
+    if(mcJoeLocation.x < pos.x){
+      super.kick( WEST );
+    }
+    if(mcJoeLocation.x > pos.x){
+      super.kick( EAST );
+    }
+    if(mcJoeLocation.y < pos.y){
+      super.kick( NORTH );
+    }
+    if(mcJoeLocation.y > pos.y){
+      super.kick( SOUTH );
+    }
+    
   }
   
-  // FIX MAKE A FUNCTION SO ZOMBIES CAN KEEP AWAY FROM EACH OTHER. MOVE IN OPPOSITE DIRECTIONS 
+  // FIX MAKE A FUNCTION SO ZOMBIES CAN KEEP AWAY FROM EACH OTHER. MOVE IN OPPOSITE DIRECTIONS  ------- if we decide on having more than two zombies on the screen
   void avoid(){
   
   }
