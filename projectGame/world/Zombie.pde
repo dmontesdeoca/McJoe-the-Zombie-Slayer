@@ -35,8 +35,8 @@ class Zombie extends GameCharacter {
 
   void checkSight(PVector location){
     mcJoeLocation = new PVector(location.x, location.y);
-     if((mcJoeLocation.x > pos.x - (grid_size * 5) && mcJoeLocation.x < pos.x + (grid_size * 5))  && 
-        (mcJoeLocation.y > pos.y - (grid_size * 5) && mcJoeLocation.y < pos.y + (grid_size * 5))){
+     if((mcJoeLocation.x > pos.x - (grid_size * 10) && mcJoeLocation.x < pos.x + (grid_size * 10))  && 
+        (mcJoeLocation.y > pos.y - (grid_size * 10) && mcJoeLocation.y < pos.y + (grid_size * 10)) ){ 
        inSight = true;
      }
      else

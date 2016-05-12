@@ -29,7 +29,6 @@ boolean bat = false;
 boolean weaponPicked = false;
 
 
-
 void setup() {
   frameRate( 30 );
   size( 700, 700);
