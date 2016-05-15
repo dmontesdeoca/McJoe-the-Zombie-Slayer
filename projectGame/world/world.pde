@@ -12,6 +12,16 @@ int frame = 0;
 boolean running; // flag set to true while the game is running
 Player mcJoe; // player (human)
 Zombie zombie;
+Zombie zombieF;
+Zombie zombieMM;
+Zombie zombieMF;
+Zombie zombieQ;
+/*static final int ZOMBIE_F = 5;
+static final int ZOMBIE_M = 6;
+static final int ZOMBIE_MF = 7;
+static final int ZOMBIE_MM = 8;
+static final int ZOMBIE_Q = 9*/
+
 Map map;
 Hole hole;
 int state;
@@ -47,12 +57,14 @@ void draw() {
       }
     }
     else if ( state == DUNGEON ) {
+      // make a function to call accordingly
       checkCollision();
       drawWorld();
       mcJoe.draw();
       zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       zombie.draw();
       hole.draw();
+      //end of the change
       frame++;
     }
     else if ( state == BATTLE ){
@@ -132,6 +144,7 @@ void setWorld(){
   running = true;
   map.read();
   
+  //here make a function to do it accordingly to each level
   mcJoe = new Player( map );
   zombie = new Zombie( map );
     screen = loadImage( "../Graphics/map/mapOne.jpg" );
@@ -182,7 +195,7 @@ void drawWorld(){
 
 void checkCollision() {
   
-  for ( int direction = 0; direction < 4; direction++ ) {
+  for ( int direction = 0; direction < 4; direction++ ) { // change so it can check if it is all the zombies and the queen
     switch( direction ) {
       case NORTH:
         if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "6" ) ) {
@@ -215,11 +228,11 @@ void checkCollision() {
 
 // create the buttons for the weapons
 void createButtons(){
-  highLight = color(100);  // change to red maybe?
-  swordColor = color(255); // replace to image
-  bowColor = color(255); // replace to image
-  gunColor = color(255); // replace to image
-  batColor = color(255); // replace to image
+  //highLight = color(100);  // change to red maybe?
+  //swordColor = color(255); // replace to image
+  //bowColor = color(255); // replace to image
+  //gunColor = color(255); // replace to image
+  //batColor = color(255); // replace to image
 
   // set coor for the buttons
   swordX = grid_size;
