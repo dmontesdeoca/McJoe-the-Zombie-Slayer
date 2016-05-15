@@ -143,8 +143,6 @@ void chooseCharacter(int charImage){
                                   }
                                         else if(charImage == ZOMBIE_Q){
                                                 charImg = loadImage("../Graphics/battle/zombieQueen.png");
-                                        }
-    
-    
+                                        }   
   }
 }

@@ -2,9 +2,9 @@ static final int NORTH = 0;
 static final int WEST  = 1;
 static final int SOUTH = 2;
 static final int EAST  = 3;
-static final int grid_size = 28;         //  20,  28,  40
-static final int WIDTH = 700;            // 500, 700, 1000  when changing size make sure to change size() in setup
-static final int LENGTH = 700;           // 500, 700, 1000  
+static final int grid_size = 40;         //  20,  28,  40
+static final int WIDTH = 1000;            // 500, 700, 1000  when changing size make sure to change size() in setup
+static final int LENGTH = 1000;           // 500, 700, 1000  
 PImage screen;
 
 int frame = 0;
@@ -31,7 +31,7 @@ boolean weaponPicked = false;
 
 void setup() {
   frameRate( 30 );
-  size( 700, 700);
+  size( 1000, 1000);
   state = MAIN;
   running = true;
   setWorld(); // here set the main page, create the buttons
@@ -297,39 +297,51 @@ void mousePressed() {
 void buttonHighLight(){
   //put in a function called highlight button
       if (sword){
-        fill(highLight);
+        noFill();
+        strokeWeight(7);
+        stroke(204, 150, 150);
       } 
       else{
-        fill(swordColor); // here put image
+        noFill();
+        strokeWeight(7);
+        stroke(0);
       }
-      stroke(0);
       rect(swordX, swordY, buttonSize, buttonSize);
   
       if (bow){
-        fill(highLight);
+        noFill();
+        strokeWeight(7);
+        stroke(204, 100, 0);
       } 
       else{
-        fill(bowColor); // here put image
+        noFill();
+        strokeWeight(7);
+        stroke(0);
       }
-      stroke(0);
       rect(bowX, bowY, buttonSize, buttonSize);
       
       if (gun){
-        fill(highLight);
+        noFill();
+        strokeWeight(7);
+        stroke(204, 102, 0);
       } 
       else{
-        fill(gunColor); // here put image
+        noFill();
+        strokeWeight(7);
+        stroke(0);
       }
-      stroke(0);
       rect(gunX, gunY, buttonSize, buttonSize);
       
       if (bat) {
-        fill(highLight);
+        noFill();
+        strokeWeight(7);
+        stroke(204, 102, 0);
       } 
       else{
-        fill(batColor); // here put image
+        noFill();
+        strokeWeight(7);
+        stroke(0);
       }
-      stroke(0);
       rect(batX, batY, buttonSize, buttonSize);
 }
     
