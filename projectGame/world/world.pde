@@ -299,7 +299,7 @@ void buttonHighLight(){
       if (sword){
         noFill();
         strokeWeight(7);
-        stroke(204, 150, 150);
+        stroke(199, 149, 42);
       } 
       else{
         noFill();
@@ -311,7 +311,7 @@ void buttonHighLight(){
       if (bow){
         noFill();
         strokeWeight(7);
-        stroke(204, 100, 0);
+        stroke(199, 149, 42);
       } 
       else{
         noFill();
@@ -323,7 +323,7 @@ void buttonHighLight(){
       if (gun){
         noFill();
         strokeWeight(7);
-        stroke(204, 102, 0);
+        stroke(199, 149, 42);
       } 
       else{
         noFill();
@@ -335,7 +335,7 @@ void buttonHighLight(){
       if (bat) {
         noFill();
         strokeWeight(7);
-        stroke(204, 102, 0);
+        stroke(199, 149, 42);
       } 
       else{
         noFill();
