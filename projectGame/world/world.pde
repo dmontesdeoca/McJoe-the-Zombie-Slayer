@@ -16,11 +16,7 @@ Zombie zombieF;
 Zombie zombieMM;
 Zombie zombieMF;
 Zombie zombieQ;
-/*static final int ZOMBIE_F = 5;
-static final int ZOMBIE_M = 6;
-static final int ZOMBIE_MF = 7;
-static final int ZOMBIE_MM = 8;
-static final int ZOMBIE_Q = 9*/
+
 
 Map map;
 Hole hole;
@@ -29,7 +25,6 @@ int state;
 //for the main screen buttons 
 int swordX, swordY, bowX, bowY, gunX, gunY, batX, batY;  // position of the buttons
 int buttonSize = WIDTH / 5;     // diameter of button
-color swordColor, bowColor, gunColor, batColor;
 color highLight;
 boolean sword = false;
 boolean bow = false;
@@ -57,22 +52,32 @@ void draw() {
       }
     }
     else if ( state == DUNGEON ) {
-      // make a function to call accordingly
       checkCollision();
       drawWorld();
-      mcJoe.draw();
+      // make a function to call accordingly
+      drawLevel();
+      /*mcJoe.draw();
       zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
       zombie.draw();
-      hole.draw();
+      zombieF.draw();
+      hole.draw();*/
       //end of the change
       frame++;
     }
     else if ( state == BATTLE ){
         imageMode(CORNERS);
         image(screen, 0, 0, WIDTH, LENGTH);
+        
+        drawLevel();
+        /*
+        //MAKE FUNCTION ACCORDINGLY
         mcJoe.draw();
         zombie.draw();
-        hole.draw();
+        // CHECK
+        zombieF.draw();
+        hole.draw();*/
         frame++;
     }
   }
@@ -139,33 +144,49 @@ void setWorld(){
          createButtons();
   }
   if(state == DUNGEON){
-  map = new Map();
-  hole = new Hole();
-  running = true;
-  map.read();
+    map = new Map();
+    hole = new Hole();
+    running = true;
+    map.read();
   
-  //here make a function to do it accordingly to each level
-  mcJoe = new Player( map );
-  zombie = new Zombie( map );
-    screen = loadImage( "../Graphics/map/mapOne.jpg" );
-    for ( int x = 0; x < map.getMaxX(); x++ ) {
-      for ( int y = 0; y < map.getMaxY(); y++ ) {
-        String value = map.getValue( x, y );
-        switch ( value ) {
-          /*
-          case "1":
-            obstacles.add( new PVector( x * grid_size, y * grid_size ) );
-            break;
-          */
-          case "2":
-            mcJoe.reset( x * grid_size, y * grid_size );
-            break;
-          case "3":
-            hole.reset( x * grid_size, y * grid_size );
-            break;
-          case "6":
-            zombie.reset( x * grid_size, y * grid_size );
-            break;
+    //here make a function to do it accordingly to each level
+    dungeonLevel();
+    /*mcJoe = new Player( map );
+    zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
+    // check
+    zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);*/
+
+
+// make a function draw map draws depending on the current state
+    if(CURRENTSTATE == 0 ||CURRENTSTATE == 1 || CURRENTSTATE == 2){
+      screen = loadImage( "../Graphics/map/mapOne.jpg" );
+    }
+    
+      for ( int x = 0; x < map.getMaxX(); x++ ) {
+        for ( int y = 0; y < map.getMaxY(); y++ ) {
+          String value = map.getValue( x, y );
+          switch ( value ) { // create one for each level
+            case "2":
+              mcJoe.reset( x * grid_size, y * grid_size );
+              break;
+            case "3":
+              hole.reset( x * grid_size, y * grid_size );
+              break;
+            case "5":
+              zombieF.reset( x * grid_size, y * grid_size );
+              break;
+            case "6":
+              zombie.reset( x * grid_size, y * grid_size );
+              break;
+            case "7":
+              zombieMF.reset( x * grid_size, y * grid_size );
+              break;
+            case "8":
+              zombieMM.reset( x * grid_size, y * grid_size );
+              break;
+            case "9":
+              zombieQ.reset( x * grid_size, y * grid_size );
+              break;
         }
       }
     }
@@ -177,14 +198,33 @@ void setBattle() {
   state = BATTLE;
   screen = loadImage( "../Graphics/battle/battle.png" );
   mcJoe.setState( BATTLE );
-  zombie.setState( BATTLE );
-  hole.setState( BATTLE );
   
- /* mcJoe.reset( 125 * 2, 400 * 2 ); 
-  zombie.reset( 375 * 2, 400 *2 );*/
+  // for zombie creat a zombiefunction depending on each level
+  if(CURRENTSTATE == 0){
+    zombie.setState( BATTLE );
+    zombieF.setState( BATTLE );
+    hole.setState( BATTLE );
   
-  mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
-  zombie.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
+    zombie.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    zombieF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+  }
+  else if(CURRENTSTATE == 1){
+    zombieMM.setState( BATTLE );
+    zombieMF.setState( BATTLE );
+    hole.setState( BATTLE );
+  
+    mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
+    zombieMM.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    zombieMF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+  }  
+  else if(CURRENTSTATE == 2){
+    zombieQ.setState( BATTLE );
+    hole.setState( BATTLE );
+  
+    mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
+    zombieQ.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+  }
   
 }
 
@@ -198,25 +238,41 @@ void checkCollision() {
   for ( int direction = 0; direction < 4; direction++ ) { // change so it can check if it is all the zombies and the queen
     switch( direction ) {
       case NORTH:
-        if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "6" ) ) {
+        if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "5" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "6" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "7" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "8" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y - grid_size ) / grid_size ) ).equals( "9" ) ) {
           setBattle();
           return;
         }
         break;
       case SOUTH:
-        if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "6" ) ) {
+        if ( map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "5" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "6" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "7" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "8" ) ||
+             map.getValue( ( int )( mcJoe.getPos().x / grid_size ), ( int ) ( ( mcJoe.getPos().y + grid_size ) / grid_size ) ).equals( "9" ) ) {
           setBattle();
           return;
         }
         break;
       case WEST:
-        if ( map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "6" ) ) {
+        if ( map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "5" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "6" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "7" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "8" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x - grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "9" ) ) {
           setBattle();
           return;
         }
         break;
       case EAST:
-        if ( map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "6" ) ) {
+        if ( map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "5" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "6" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "7" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "8" ) ||
+             map.getValue( ( int )( ( mcJoe.getPos().x + grid_size ) / grid_size ), ( int )( mcJoe.getPos().y / grid_size ) ).equals( "9" ) ) {
           setBattle();
           return;
         }
@@ -228,12 +284,6 @@ void checkCollision() {
 
 // create the buttons for the weapons
 void createButtons(){
-  //highLight = color(100);  // change to red maybe?
-  //swordColor = color(255); // replace to image
-  //bowColor = color(255); // replace to image
-  //gunColor = color(255); // replace to image
-  //batColor = color(255); // replace to image
-
   // set coor for the buttons
   swordX = grid_size;
   swordY = width - buttonSize - (grid_size*3);
@@ -355,4 +405,78 @@ void buttonHighLight(){
       }
       rect(batX, batY, buttonSize, buttonSize);
 }
-    
+   
+void drawLevel(){ // from the draw battle
+      if(state == DUNGEON){
+        // make a function for each level
+        if(CURRENTSTATE == 0){
+          mcJoe.draw();
+          zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+          zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
+          zombie.draw();
+          zombieF.draw();
+          hole.draw();
+        }
+        else if(CURRENTSTATE == 1){
+          mcJoe.draw();
+          zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+          zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
+          zombieMM.draw();
+          zombieMF.draw();
+          hole.draw();
+        }
+        else if(CURRENTSTATE == 2){
+          mcJoe.draw();
+          zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
+          zombieQ.draw();
+          hole.draw();
+        }
+      }
+      
+      if(state == BATTLE){
+        // make a function for each level
+        if(CURRENTSTATE == 0){
+            mcJoe.draw();
+            zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+            zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
+            zombie.draw();
+            zombieF.draw();
+            hole.draw();
+        }
+        else if(CURRENTSTATE == 1){
+            mcJoe.draw();
+            zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+            zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
+            zombieMM.draw();
+            zombieMF.draw();
+            hole.draw();
+        }
+        else if(CURRENTSTATE == 2){
+            mcJoe.draw();
+            zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+      
+            zombieQ.draw();
+            hole.draw();
+        }
+      }
+}
+
+void dungeonLevel(){
+    mcJoe = new Player( map );
+    if(CURRENTSTATE == 0){
+      zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
+      zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
+    }
+    else if(CURRENTSTATE ==1){
+      zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
+      zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
+    }
+    else if(CURRENTSTATE == 2){
+      zombieQ = new Zombie( map, ZOMBIE_Q, ZOM_Q);
+    }
+}

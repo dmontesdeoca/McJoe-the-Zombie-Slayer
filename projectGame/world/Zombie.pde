@@ -1,3 +1,9 @@
+static final String ZOM_F = "5";
+static final String ZOM_M = "6";
+static final String ZOM_MF = "7";
+static final String ZOM_MM = "8";
+static final String ZOM_Q = "9";
+
 class Zombie extends GameCharacter {
   String[][] mapArr;
   int frame = 0;
@@ -5,8 +11,8 @@ class Zombie extends GameCharacter {
   boolean inSight = false;
   PVector mcJoeLocation; // mcJoes current location
   
-  Zombie( Map map ) {
-    super( map, "6", ZOMBIE_F );
+  Zombie( Map map , int typeZombie, String zombieKind) {
+    super( map, zombieKind, /*ZOMBIE_F*/ typeZombie );
     mapArr = new String[map.getMaxX()][map.getMaxY()];
     arrayCopy( map.getMapArray(), mapArr );
     ellipseMode( CORNER );

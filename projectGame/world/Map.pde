@@ -1,3 +1,6 @@
+int CURRENTSTATE = 1;
+
+
 class Map{
  // int mapArr[][];
   
@@ -8,7 +11,18 @@ String[][] mapArr;
 /** map constructor where we will create a reader to the file**/
   Map() {
     // Open the file from the createWriter() example
-     reader = createReader("../Maps/map1.stdin");
+    if(CURRENTSTATE == 0){
+         reader = createReader("../Maps/map1.stdin");
+    }
+    else if(CURRENTSTATE == 1){
+         reader = createReader("../Maps/map2.stdin");
+    }
+          else if(CURRENTSTATE == 2){
+               reader = createReader("../Maps/map3.stdin");
+          }
+              // else if(CURRENTSTATE == 3){
+                //   reader = createReader("../Maps/map1.stdin");
+                //}
   }
  
 void read() {
