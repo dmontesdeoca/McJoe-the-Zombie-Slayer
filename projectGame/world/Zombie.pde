@@ -62,9 +62,4 @@ class Zombie extends GameCharacter {
     }
     
   }
-  
-  // FIX MAKE A FUNCTION SO ZOMBIES CAN KEEP AWAY FROM EACH OTHER. MOVE IN OPPOSITE DIRECTIONS  ------- if we decide on having more than two zombies on the screen
-  void avoid(){
-  
-  }
 }

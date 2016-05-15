@@ -16,7 +16,7 @@ class GameCharacter extends GameObject {
   private boolean jump;
   private boolean fall;
   private PVector beforeJump;
-  private PVector vel;
+  private ArrayList<Integer> vel;
   
   GameCharacter( Map map, String ID, /*PImage charImg*/ int character) {
     super();
@@ -26,7 +26,7 @@ class GameCharacter extends GameObject {
     fall = false;
     jump = false;
     beforeJump = new PVector();
-    vel = new PVector();
+    vel = new ArrayList<Integer>();
     chooseCharacter(character);
   }
   
@@ -69,10 +69,10 @@ class GameCharacter extends GameObject {
           //jump.y += grid_size * 4;
           break;
         case WEST:
-          vel.x -= grid_size / 2;
+          vel.add( grid_size / -2 );
           break;
         case EAST:
-          vel.x += grid_size / 2;
+          vel.add ( grid_size / 2 );
           break;
         } // switch
     }
@@ -88,7 +88,7 @@ class GameCharacter extends GameObject {
     if ( state == BATTLE ) {
       if ( jump ) {
         pos.y -= grid_size / 2;
-        if ( beforeJump.y - pos.y > 150 ) {
+        if ( beforeJump.y - pos.y > 200 ) {
           jump = false;
           fall = true;
         }
@@ -100,17 +100,23 @@ class GameCharacter extends GameObject {
            fall = false;
          }
       }
-      //if ( keyPressed ) {
-        pos.x += vel.x;
-      //}
+      
+      if ( !keyPressed && !jump && !fall) {
+        vel.clear(); 
+      }
+      
+      if ( vel.size() > 0 ) {
+        pos.x += vel.get( 0 );
+        vel.remove( 0 );
+      }
       
       if ( pos.x < 0 ) {
         pos.x = 0;
-        vel.x = 0;
+        vel.clear();
       }
       else if ( pos.x >= width ) {
         pos.x = width - grid_size * 2;
-        vel.x = 0;
+        vel.clear();
       }
     }
   } // draw()

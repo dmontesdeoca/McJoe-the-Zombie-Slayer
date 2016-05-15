@@ -2,9 +2,9 @@ static final int NORTH = 0;
 static final int WEST  = 1;
 static final int SOUTH = 2;
 static final int EAST  = 3;
-static final int grid_size = 40;         //  20,  28,  40
-static final int WIDTH = 1000;            // 500, 700, 1000  when changing size make sure to change size() in setup
-static final int LENGTH = 1000;           // 500, 700, 1000  
+static final int grid_size = 28;         //  20,  28,  40
+static final int WIDTH = 700;            // 500, 700, 1000  when changing size make sure to change size() in setup
+static final int LENGTH = 700;           // 500, 700, 1000  
 PImage screen;
 
 int frame = 0;
@@ -31,7 +31,7 @@ boolean weaponPicked = false;
 
 void setup() {
   frameRate( 30 );
-  size( 1000, 1000);
+  size( 700, 700);
   state = MAIN;
   running = true;
   setWorld(); // here set the main page, create the buttons
@@ -58,7 +58,6 @@ void draw() {
     }
     else if ( state == BATTLE ){
        // background(10); //battle screen will go here!
-        screen = loadImage( "../Graphics/battle/battle.png" );
         imageMode(CORNERS);
         image(screen, 0, 0, WIDTH, LENGTH);
         mcJoe.draw();
@@ -168,6 +167,7 @@ void setBattle() {
   mcJoe.setState( BATTLE );
   zombie.setState( BATTLE );
   hole.setState( BATTLE );
+  screen = loadImage( "../Graphics/battle/battle.png" );
   
  /* mcJoe.reset( 125 * 2, 400 * 2 ); 
   zombie.reset( 375 * 2, 400 *2 );*/
