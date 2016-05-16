@@ -30,6 +30,10 @@ class GameCharacter extends GameObject {
     chooseCharacter(character);
   }
   
+  void setMap( Map map ) {
+    this.map = map;
+  }
+  
   void kick( int direction ) {
     if ( state == DUNGEON ) {
       map.setValue( ( int )( pos.x / grid_size ), ( int ) ( pos.y / grid_size ), "0" );

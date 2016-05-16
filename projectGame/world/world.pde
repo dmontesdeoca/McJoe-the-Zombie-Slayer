@@ -19,6 +19,7 @@ Zombie zombieQ;
 
 
 Map map;
+Coin[] coins;
 Hole hole;
 int state;
 
@@ -38,7 +39,9 @@ void setup() {
   size( 700, 700);
   state = MAIN;
   running = true;
-  setWorld(); // here set the main page, create the buttons
+  setWorld(); // here set the main page, create the button
+  mcJoe = new Player( new Map() );
+  coins = new Coin[5];
 } // setup()
 
 void draw() {
@@ -223,7 +226,7 @@ void setWorld(){
     if(CURRENTSTATE == 0 ||CURRENTSTATE == 1 || CURRENTSTATE == 2){
       screen = loadImage( "../Graphics/map/mapOne.jpg" );
     }
-    
+      int coin = 0;
       for ( int x = 0; x < map.getMaxX(); x++ ) {
         for ( int y = 0; y < map.getMaxY(); y++ ) {
           String value = map.getValue( x, y );
@@ -233,6 +236,9 @@ void setWorld(){
               break;
             case "3":
               hole.reset( x * grid_size, y * grid_size );
+              break;
+            case "4":
+              coins[coin++].reset( x * grid_size, y * grid_size );
               break;
             case "5":
               zombieF.reset( x * grid_size, y * grid_size );
@@ -476,6 +482,11 @@ void buttonHighLight(){
 void drawLevel(){ // from the draw battle
       if(state == DUNGEON){
         // make a function for each level
+        if(!(CURRENTSTATE == 4)) {
+          for(Coin c : coins) {
+            c.draw(); 
+          }
+        }
         if(CURRENTSTATE == 0){
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -534,7 +545,7 @@ void drawLevel(){ // from the draw battle
 }
 
 void dungeonLevel(){
-    mcJoe = new Player( map );
+    mcJoe.setMap( map );
     if(CURRENTSTATE == 0){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
