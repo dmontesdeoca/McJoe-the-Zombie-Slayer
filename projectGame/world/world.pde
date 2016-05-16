@@ -604,7 +604,7 @@ void dungeonLevel(){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
-    else if(CURRENTSTATE ==2){
+    else if(CURRENTSTATE == 2){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
