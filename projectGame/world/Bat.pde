@@ -1,4 +1,3 @@
-
 class Bat extends MeleeWeapon {
   
   Bat() {

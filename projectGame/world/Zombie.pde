@@ -11,7 +11,7 @@ class Zombie extends GameCharacter {
   PVector mcJoeLocation; // mcJoes current location
   
   Zombie( Map map , int typeZombie, String zombieKind) {
-    super( map, zombieKind, /*ZOMBIE_F*/ typeZombie );
+    super( map, zombieKind, typeZombie );
     pos = new PVector( 0, 0 ); // start bottom left corner
   }
   

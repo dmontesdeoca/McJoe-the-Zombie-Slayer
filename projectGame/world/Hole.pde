@@ -1,3 +1,5 @@
+boolean hole_access = false;
+
 class Hole extends GameObject {
   int d = grid_size;       // diameter of the player
 

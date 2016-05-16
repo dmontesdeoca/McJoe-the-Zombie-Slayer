@@ -1,4 +1,4 @@
-int CURRENTSTATE = 0;
+int CURRENTSTATE = 2;
 
 
 class Map{
@@ -27,7 +27,8 @@ String[][] mapArr;
                          reader = createReader("../Maps/map5.stdin");
                     }
   }
- 
+
+// reads the map text file into an array
 void read() {
   int x = 0, y = 0; 
   try {
@@ -61,9 +62,19 @@ void read() {
    
 } // read()
 
+// returns the max size of columns
 int getMaxX() { return maxX; }
+
+// returns the max size of rows
 int getMaxY() { return maxY; }
+
+// returns the value of the element array[y][x]
 String getValue( int x, int y ) { return mapArr[y][x]; }
+
+// sets value to element array array[y][x]
 void setValue( int x, int y, String val ) { mapArr[y][x] = val; }
+
+// returns map
 String[][] getMapArray() { return mapArr; }
+
 } // end of Map class

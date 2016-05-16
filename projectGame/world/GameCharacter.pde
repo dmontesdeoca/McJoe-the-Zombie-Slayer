@@ -18,7 +18,7 @@ class GameCharacter extends GameObject {
   protected PVector beforeJump;
   protected ArrayList<Integer> vel;
   
-  GameCharacter( Map map, String ID, /*PImage charImg*/ int character) {
+  GameCharacter( Map map, String ID, int character) {
     super();
     this.ID = ID;
     this.map = map;
@@ -151,4 +151,4 @@ void chooseCharacter(int charImage){
                                                 charImg = loadImage("../Graphics/battle/zombieQueen.png");
                                         }   
   }
-}
+} // chooseCharacter()
