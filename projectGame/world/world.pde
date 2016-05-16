@@ -17,9 +17,9 @@ Zombie zombieMM;
 Zombie zombieMF;
 Zombie zombieQ;
 
+
 Map map;
 Hole hole;
-Coin[] coins;
 int state;
 
 //for the main screen buttons 
@@ -39,14 +39,12 @@ void setup() {
   state = MAIN;
   running = true;
   setWorld(); // here set the main page, create the buttons
-  mcJoe = new Player( new Map() );
-  //coins = new Coin[5];
 } // setup()
 
 void draw() {
   // TEST make sure
   if ( running ) {
-      // TEST make sure
+      // TEST make sure that for each level it swaps accordingly 
    /* if(frame == 300 || frame == 600 || frame == 900 || frame == 1200){
       CURRENTSTATE++;
       setWorld();
@@ -231,7 +229,6 @@ void setWorld(){
       screen = loadImage( "../Graphics/map/mapOne.jpg" );
     }
     
-      //int c = 0;
       for ( int x = 0; x < map.getMaxX(); x++ ) {
         for ( int y = 0; y < map.getMaxY(); y++ ) {
           String value = map.getValue( x, y );
@@ -241,9 +238,6 @@ void setWorld(){
               break;
             case "3":
               hole.reset( x * grid_size, y * grid_size );
-              break;
-            case "4":
-              //coins[c++].reset( x * grid_size, y * grid_size );
               break;
             case "5":
               zombieF.reset( x * grid_size, y * grid_size );
@@ -505,12 +499,6 @@ void buttonHighLight(){
 void drawLevel(){ // from the draw battle
       if(state == DUNGEON){
         // make a function for each level
-        /*if(!(CURRENTSTATE == 4)){
-          for(Coin c : coins){
-            c.draw(); 
-          }
-        }
-        */
         if(CURRENTSTATE == 0){
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -530,15 +518,16 @@ void drawLevel(){ // from the draw battle
           mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
+          mcJoe.draw();
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
  
           zombie.draw();
           zombieMF.draw();
           hole.draw();
-          mcJoe.draw();
         }
         else if(CURRENTSTATE == 1){
+          mcJoe.draw();
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
 
@@ -547,6 +536,7 @@ void drawLevel(){ // from the draw battle
           hole.draw();
         }
         else if(CURRENTSTATE == 4){
+          mcJoe.draw();
           zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombieQ.draw();
@@ -576,24 +566,25 @@ void drawLevel(){ // from the draw battle
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
+            mcJoe.draw();
             zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombie.draw();
             zombieMF.draw();
             hole.draw();
-            mcJoe.draw();
         }
         else if(CURRENTSTATE == 1){
+            mcJoe.draw();
             zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieF.draw();
             zombieMM.draw();
             hole.draw();
-            mcJoe.draw();
         }
         else if(CURRENTSTATE == 4){
+            mcJoe.draw();
             zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieQ.draw();
@@ -604,7 +595,7 @@ void drawLevel(){ // from the draw battle
 }
 
 void dungeonLevel(){
-    mcJoe.setMap( map );
+    mcJoe = new Player( map);
     if(CURRENTSTATE == 0){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
@@ -613,7 +604,7 @@ void dungeonLevel(){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
-    else if(CURRENTSTATE == 2){
+    else if(CURRENTSTATE ==2){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
