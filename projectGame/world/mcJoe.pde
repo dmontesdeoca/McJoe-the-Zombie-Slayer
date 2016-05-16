@@ -7,14 +7,14 @@ class Player extends GameCharacter {
   Weapon weapon;
 
   /** Player constructor **/
-  Player( Map map, Weapon weapon ) {
+  Player( Map map ) {
     //default image for mcJoe is a bat
     super( map, "2", WEAPON );    
               
     //ellipseMode(CORNERS);
     
     this.map = map;
-    this.weapon = weapon;
+    this.weapon = new Sword();
     pos = new PVector( 0, 0 );
   }
   
@@ -25,7 +25,8 @@ class Player extends GameCharacter {
       }
     }
     super.draw();
-    weapon.reset( (int) pos.x + grid_size * 3, (int) pos.y + grid_size );
+    weapon.reset( (int) pos.x + grid_size, (int) pos.y + grid_size );
+    weapon.draw();
   }
   
   void attack( float x, float y ) {

@@ -13,23 +13,25 @@ class MeleeWeapon extends Weapon {
   
   void draw() {
      if ( state == BATTLE && attack ) {
-       imageMode( CENTER );
        if ( right ) {
-         rotate( PI / 30 );  
-         if ( attackFrame == 30 ) {
+         stroke( 255 );
+         curve( pos.x + grid_size * 2, pos.y - grid_size * 2, pos.x + grid_size * 3, pos.y - grid_size, pos.x + grid_size * 3, pos.y + grid_size, pos.x + grid_size * 2, pos.y + grid_size * 2 );
+         line( pos.x, pos.y, pos.x + grid_size * 3, pos.y - grid_size + attackFrame * 10 );
+         if ( attackFrame == 5 ) {
            right = false;
            attack = false;
          }
        }
        else if ( left ) {
-         scale( -1, 1 );
-         translate( grid_size * -4, 0 );
-         rotate( PI / -30 );
-         if ( attackFrame == 30 ) {
+         stroke( 255 );
+         curve( pos.x - grid_size * 2, pos.y - grid_size * 2, pos.x - grid_size * 3, pos.y - grid_size, pos.x - grid_size * 3, pos.y + grid_size, pos.x - grid_size * 2, pos.y + grid_size * 2 );
+         line( pos.x, pos.y, pos.x - grid_size * 3, pos.y - grid_size + attackFrame * 10 );
+         if ( attackFrame == 5 ) {
            left = false;
            attack = false;
          }
        }
+       attackFrame++;
        super.draw();
      }
   }

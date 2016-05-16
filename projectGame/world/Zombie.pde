@@ -5,7 +5,6 @@ static final String ZOM_MM = "8";
 static final String ZOM_Q = "9";
 
 class Zombie extends GameCharacter {
-  String[][] mapArr;
   int frame = 0;
   String move;
   boolean inSight = false;
@@ -13,22 +12,25 @@ class Zombie extends GameCharacter {
   
   Zombie( Map map , int typeZombie, String zombieKind) {
     super( map, zombieKind, /*ZOMBIE_F*/ typeZombie );
-    mapArr = new String[map.getMaxX()][map.getMaxY()];
-    arrayCopy( map.getMapArray(), mapArr );
-    ellipseMode( CORNER );
     pos = new PVector( 0, 0 ); // start bottom left corner
   }
   
   void draw() {
      super.draw();
-     if ( frame % 10 == 0 ) {
-         if(inSight){
-             chase();
-         }
-         else{
-              makeRandomMove();         
-         }
+     
+     if ( state == BATTLE && pos.dist( mcJoeLocation, pos ) > grid_size * 4 ) {
+       chase(); 
      }
+     else if ( state == DUNGEON ) {
+       if ( frame % 10 == 0 ) {
+           if(inSight){
+               chase();
+           }
+           else{
+                makeRandomMove();         
+           }
+       }
+    }
      frame++;
   } // draw()
   
