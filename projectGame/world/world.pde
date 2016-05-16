@@ -40,7 +40,7 @@ void setup() {
   running = true;
   setWorld(); // here set the main page, create the buttons
   mcJoe = new Player( new Map() );
-  coins = new Coin[5];
+  //coins = new Coin[5];
 } // setup()
 
 void draw() {
@@ -231,7 +231,7 @@ void setWorld(){
       screen = loadImage( "../Graphics/map/mapOne.jpg" );
     }
     
-      int c = 0;
+      //int c = 0;
       for ( int x = 0; x < map.getMaxX(); x++ ) {
         for ( int y = 0; y < map.getMaxY(); y++ ) {
           String value = map.getValue( x, y );
@@ -243,7 +243,7 @@ void setWorld(){
               hole.reset( x * grid_size, y * grid_size );
               break;
             case "4":
-              coins[c++].reset( x * grid_size, y * grid_size );
+              //coins[c++].reset( x * grid_size, y * grid_size );
               break;
             case "5":
               zombieF.reset( x * grid_size, y * grid_size );
@@ -505,12 +505,12 @@ void buttonHighLight(){
 void drawLevel(){ // from the draw battle
       if(state == DUNGEON){
         // make a function for each level
-        if(!(CURRENTSTATE == 4)){
+        /*if(!(CURRENTSTATE == 4)){
           for(Coin c : coins){
             c.draw(); 
           }
         }
-        
+        */
         if(CURRENTSTATE == 0){
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
