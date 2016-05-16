@@ -43,8 +43,9 @@ void setup() {
 
 void draw() {
   // TEST make sure
-  /*if ( running ) {
-    if(frame == 300 || frame == 600 || frame == 900 || frame == 1200){
+  if ( running ) {
+      // TEST make sure
+   /* if(frame == 300 || frame == 600 || frame == 900 || frame == 1200){
       CURRENTSTATE++;
       setWorld();
     }*/
@@ -84,6 +85,7 @@ void draw() {
         hole.draw();*/
         frame++;
     }
+  }
 } // draw()
 
 /** this function is called when the user releases a key.
@@ -274,7 +276,7 @@ void setBattle() {
     zombie.reset( (WIDTH/4)*2, WIDTH - (WIDTH/5) );
     zombieF.reset( (WIDTH/4)*4, WIDTH - (WIDTH/5) );
   }
-  else if(CURRENTSTATE == 1){
+  else if(CURRENTSTATE == 3){
     zombieMM.setState( BATTLE );
     zombieMF.setState( BATTLE );
     hole.setState( BATTLE );
@@ -292,7 +294,7 @@ void setBattle() {
     zombie.reset( (WIDTH/4)*2, WIDTH - (WIDTH/5) );
     zombieMF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
   }
-  else if(CURRENTSTATE == 3){
+  else if(CURRENTSTATE == 1){
     zombieF.setState( BATTLE );
     zombieMM.setState( BATTLE );
     hole.setState( BATTLE );
@@ -506,7 +508,7 @@ void drawLevel(){ // from the draw battle
           hole.draw();
           mcJoe.draw();
         }
-        else if(CURRENTSTATE == 1){
+        else if(CURRENTSTATE == 3){
           zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
@@ -524,7 +526,7 @@ void drawLevel(){ // from the draw battle
           zombieMF.draw();
           hole.draw();
         }
-        else if(CURRENTSTATE == 3){
+        else if(CURRENTSTATE == 1){
           mcJoe.draw();
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -554,7 +556,7 @@ void drawLevel(){ // from the draw battle
             hole.draw();
             mcJoe.draw();
         }
-        else if(CURRENTSTATE == 1){
+        else if(CURRENTSTATE == 3){
             zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
@@ -572,7 +574,7 @@ void drawLevel(){ // from the draw battle
             zombieMF.draw();
             hole.draw();
         }
-        else if(CURRENTSTATE == 3){
+        else if(CURRENTSTATE == 1){
             mcJoe.draw();
             zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -598,7 +600,7 @@ void dungeonLevel(){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
     }
-    else if(CURRENTSTATE ==1){
+    else if(CURRENTSTATE == 3){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
@@ -606,7 +608,7 @@ void dungeonLevel(){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
-    else if(CURRENTSTATE == 3){
+    else if(CURRENTSTATE == 1){
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
     }

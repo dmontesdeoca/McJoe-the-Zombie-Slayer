@@ -14,13 +14,13 @@ String[][] mapArr;
     if(CURRENTSTATE == 0){
          reader = createReader("../Maps/map1.stdin");
     }
-    else if(CURRENTSTATE == 1){
+    else if(CURRENTSTATE == 3){
          reader = createReader("../Maps/map2.stdin");
     }
           else if (CURRENTSTATE == 2){
                reader = createReader("../Maps/map3.stdin");
           }
-               else if(CURRENTSTATE == 3){
+               else if(CURRENTSTATE == 1){
                    reader = createReader("../Maps/map4.stdin");
                 }
                     else if(CURRENTSTATE == 4){
