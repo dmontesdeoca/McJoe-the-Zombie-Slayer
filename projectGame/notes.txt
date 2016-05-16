@@ -1,0 +1,20 @@
+
+denise
+main screen, assigning weapon and drawing the right mcjoe
+graphics
+levels
+map, map class... reading
+dungeon level zombie chasing mcjoe AI
+
+alex
+
+game objects
+dungeon movement
+battle screen, and battle ai
+
+powerpoint
+story page
+put the story from documentation
+
+game mechanics
+dungeon and battle screen 
