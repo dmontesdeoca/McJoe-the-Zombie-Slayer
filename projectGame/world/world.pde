@@ -42,11 +42,12 @@ void setup() {
 } // setup()
 
 void draw() {
-  if ( running ) {
+  // TEST make sure
+  /*if ( running ) {
     if(frame == 300 || frame == 600 || frame == 900 || frame == 1200){
       CURRENTSTATE++;
       setWorld();
-    }
+    }*/
     if( state == MAIN ){
        updateMouse(mouseX, mouseY);
       if(weaponPicked){ // if a weapon was clicked set state to dungeon and set world accordingly
@@ -83,7 +84,6 @@ void draw() {
         hole.draw();*/
         frame++;
     }
-  }
 } // draw()
 
 /** this function is called when the user releases a key.
@@ -271,8 +271,8 @@ void setBattle() {
     hole.setState( BATTLE );
   
     mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
-    zombie.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
-    zombieF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    zombie.reset( (WIDTH/4)*2, WIDTH - (WIDTH/5) );
+    zombieF.reset( (WIDTH/4)*4, WIDTH - (WIDTH/5) );
   }
   else if(CURRENTSTATE == 1){
     zombieMM.setState( BATTLE );
@@ -280,7 +280,7 @@ void setBattle() {
     hole.setState( BATTLE );
   
     mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
-    zombieMM.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    zombieMM.reset( (WIDTH/4)*2, WIDTH - (WIDTH/5) );
     zombieMF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
   }
   else if(CURRENTSTATE == 2){
@@ -289,7 +289,7 @@ void setBattle() {
     hole.setState( BATTLE );
   
     mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
-    zombie.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    zombie.reset( (WIDTH/4)*2, WIDTH - (WIDTH/5) );
     zombieMF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
   }
   else if(CURRENTSTATE == 3){
@@ -298,7 +298,7 @@ void setBattle() {
     hole.setState( BATTLE );
     
     mcJoe.reset( WIDTH/4, WIDTH - (WIDTH/5) );
-    zombieF.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
+    zombieF.reset( (WIDTH/4)*2, WIDTH - (WIDTH/5) );
     zombieMM.reset( (WIDTH/4)*3, WIDTH - (WIDTH/5) );
   }
   else if(CURRENTSTATE == 4){
@@ -516,7 +516,6 @@ void drawLevel(){ // from the draw battle
           mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
-<<<<<<< HEAD
           mcJoe.draw();
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -536,8 +535,6 @@ void drawLevel(){ // from the draw battle
         }
         else if(CURRENTSTATE == 4){
           mcJoe.draw();
-=======
->>>>>>> origin/master
           zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombieQ.draw();
@@ -567,7 +564,6 @@ void drawLevel(){ // from the draw battle
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
-<<<<<<< HEAD
             mcJoe.draw();
             zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -587,8 +583,6 @@ void drawLevel(){ // from the draw battle
         }
         else if(CURRENTSTATE == 4){
             mcJoe.draw();
-=======
->>>>>>> origin/master
             zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieQ.draw();

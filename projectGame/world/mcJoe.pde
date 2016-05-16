@@ -7,11 +7,8 @@ class Player extends GameCharacter {
   Weapon weapon;
 
   /** Player constructor **/
-<<<<<<< HEAD
-  Player( Map map) {
-=======
+
   Player( Map map ) {
->>>>>>> origin/master
     //default image for mcJoe is a bat
     super( map, "2", WEAPON );    
               
