@@ -6,7 +6,7 @@ class Player extends GameCharacter {
   int hitPoints;
 
   /** Player constructor **/
-
+  
   Player( Map map ) {
     //default image for mcJoe is a bat
     super( map, "2", WEAPON );    
