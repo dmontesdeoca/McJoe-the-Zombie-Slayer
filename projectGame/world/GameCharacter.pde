@@ -13,10 +13,10 @@ class GameCharacter extends GameObject {
   protected String ID;
   protected PImage charImg;
   
-  private boolean jump;
-  private boolean fall;
-  private PVector beforeJump;
-  private ArrayList<Integer> vel;
+  protected boolean jump;
+  protected boolean fall;
+  protected PVector beforeJump;
+  protected ArrayList<Integer> vel;
   
   GameCharacter( Map map, String ID, /*PImage charImg*/ int character) {
     super();
@@ -99,10 +99,6 @@ class GameCharacter extends GameObject {
            pos.y = beforeJump.y;
            fall = false;
          }
-      }
-      
-      if ( !keyPressed && !jump && !fall) {
-        vel.clear(); 
       }
       
       if ( vel.size() > 0 ) {
