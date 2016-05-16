@@ -8,6 +8,7 @@ class GameObject {
    
    GameObject() { 
      state = DUNGEON;
+
      pos = new PVector( 0, 0 );
    }
    
