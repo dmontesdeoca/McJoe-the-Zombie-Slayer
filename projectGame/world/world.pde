@@ -94,30 +94,6 @@ void keyReleased() {
   if ( state == DUNGEON ) {
     if ( key == CODED ) {
       switch ( keyCode ) {
-      case UP:
-        mcJoe.kick( NORTH );
-        break;
-      case DOWN:
-        mcJoe.kick( SOUTH );
-        break;
-      case LEFT:
-        mcJoe.kick( WEST );
-        break;
-      case RIGHT:
-        mcJoe.kick( EAST );
-        break;
-      }
-    }
-    else if (( key == 'q' ) || ( key == 'Q' )) {
-      exit();
-    }
-  }
-} // keyReleased()
-
-void keyPressed() {
-  if ( state == BATTLE ) {
-      if ( key == CODED ) {
-        switch ( keyCode ) {
         case UP:
           mcJoe.kick( NORTH );
           break;
@@ -130,11 +106,97 @@ void keyPressed() {
         case RIGHT:
           mcJoe.kick( EAST );
           break;
-        }
       }
-      else if (( key == 'q' ) || ( key == 'Q' )) {
-        exit();
+    }
+    else {
+      switch ( key ) {
+        case 'w':
+          mcJoe.kick( NORTH );
+          break;
+        case 'W':
+          mcJoe.kick( NORTH );
+          break;
+        case 's':
+          mcJoe.kick( SOUTH );
+          break;
+        case 'S':
+          mcJoe.kick( SOUTH );
+          break;
+        case 'a':
+          mcJoe.kick( WEST );
+          break;
+        case 'A':
+          mcJoe.kick( WEST );
+          break;
+        case 'd':
+          mcJoe.kick( EAST );
+          break;
+        case 'D':
+          mcJoe.kick( EAST );
+          break;
+        case 'q':
+          exit();
+          break;
+        case 'Q':
+          exit();
+          break;
       }
+    }
+  }
+} // keyReleased()
+
+void keyPressed() {
+  if ( state == BATTLE ) {
+    if ( key == CODED ) {
+      switch ( keyCode ) {
+        case UP:
+          mcJoe.kick( NORTH );
+          break;
+        case DOWN:
+          mcJoe.kick( SOUTH );
+          break;
+        case LEFT:
+          mcJoe.kick( WEST );
+          break;
+        case RIGHT:
+          mcJoe.kick( EAST );
+          break;
+      }
+    }
+    else {
+      switch ( key ) {
+        case 'w':
+          mcJoe.kick( NORTH );
+          break;
+        case 'W':
+          mcJoe.kick( NORTH );
+          break;
+        case 's':
+          mcJoe.kick( SOUTH );
+          break;
+        case 'S':
+          mcJoe.kick( SOUTH );
+          break;
+        case 'a':
+          mcJoe.kick( WEST );
+          break;
+        case 'A':
+          mcJoe.kick( WEST );
+          break;
+        case 'd':
+          mcJoe.kick( EAST );
+          break;
+        case 'D':
+          mcJoe.kick( EAST );
+          break;
+        case 'q':
+          exit();
+          break;
+        case 'Q':
+          exit();
+          break;
+      }
+    }
   }
 }
 
@@ -356,23 +418,28 @@ boolean overButton(int x, int y, int width, int height)  {
 
 // depending where the mouse was pressed the weapon would be choosen
 // weapon is picked so make it true
-void mousePressed() {
-  if(sword){
-    weaponPicked = true;
-    WEAPON = SWORD; // assign mcjoes weapon to sword
+void mouseClicked() {
+  if ( state == MAIN ) {
+    if(sword){
+      weaponPicked = true;
+      WEAPON = SWORD; // assign mcjoes weapon to sword
+    }
+    if(bow){
+          weaponPicked = true;
+          WEAPON = BOW; // assign mcjoes weapon to bow
+  
+    }
+    if(gun){
+          weaponPicked = true;
+          WEAPON = GUN; // assign mcjoes weapon to gun
+    }
+    if(bat){
+          weaponPicked = true;
+          WEAPON = BAT; // assign mcjoes weapon to bat
+    }
   }
-  if(bow){
-        weaponPicked = true;
-        WEAPON = BOW; // assign mcjoes weapon to bow
-
-  }
-  if(gun){
-        weaponPicked = true;
-        WEAPON = GUN; // assign mcjoes weapon to gun
-  }
-  if(bat){
-        weaponPicked = true;
-        WEAPON = BAT; // assign mcjoes weapon to bat
+  else if ( state == BATTLE ) {
+    mcJoe.attack( mouseX, mouseY ); 
   }
 }
 
@@ -431,24 +498,25 @@ void drawLevel(){ // from the draw battle
       if(state == DUNGEON){
         // make a function for each level
         if(CURRENTSTATE == 0){
-          mcJoe.draw();
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombie.draw();
           zombieF.draw();
           hole.draw();
+          mcJoe.draw();
         }
         else if(CURRENTSTATE == 1){
-          mcJoe.draw();
           zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombieMM.draw();
           zombieMF.draw();
           hole.draw();
+          mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
+<<<<<<< HEAD
           mcJoe.draw();
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -468,34 +536,38 @@ void drawLevel(){ // from the draw battle
         }
         else if(CURRENTSTATE == 4){
           mcJoe.draw();
+=======
+>>>>>>> origin/master
           zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombieQ.draw();
           hole.draw();
+          mcJoe.draw();
         }
       }
       
       if(state == BATTLE){
         // make a function for each level
         if(CURRENTSTATE == 0){
-            mcJoe.draw();
             zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombie.draw();
             zombieF.draw();
             hole.draw();
+            mcJoe.draw();
         }
         else if(CURRENTSTATE == 1){
-            mcJoe.draw();
             zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieMM.draw();
             zombieMF.draw();
             hole.draw();
+            mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
+<<<<<<< HEAD
             mcJoe.draw();
             zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -515,10 +587,13 @@ void drawLevel(){ // from the draw battle
         }
         else if(CURRENTSTATE == 4){
             mcJoe.draw();
+=======
+>>>>>>> origin/master
             zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieQ.draw();
             hole.draw();
+            mcJoe.draw();
         }
       }
 }

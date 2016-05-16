@@ -8,7 +8,11 @@ class GameObject {
    
    GameObject() { 
      state = DUNGEON;
+<<<<<<< HEAD
      pos = new PVector(0,0);
+=======
+     pos = new PVector( 0, 0 );
+>>>>>>> origin/master
    }
    
    /** returns the game object's current (x,y) position **/
