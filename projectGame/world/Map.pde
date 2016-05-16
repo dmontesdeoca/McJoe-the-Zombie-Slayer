@@ -1,4 +1,4 @@
-int CURRENTSTATE = 1;
+int CURRENTSTATE = 0;
 
 
 class Map{
@@ -17,12 +17,15 @@ String[][] mapArr;
     else if(CURRENTSTATE == 1){
          reader = createReader("../Maps/map2.stdin");
     }
-          else if(CURRENTSTATE == 2){
+          else if (CURRENTSTATE == 2){
                reader = createReader("../Maps/map3.stdin");
           }
-              // else if(CURRENTSTATE == 3){
-                //   reader = createReader("../Maps/map1.stdin");
-                //}
+               else if(CURRENTSTATE == 3){
+                   reader = createReader("../Maps/map4.stdin");
+                }
+                    else if(CURRENTSTATE == 4){
+                         reader = createReader("../Maps/map5.stdin");
+                    }
   }
  
 void read() {
