@@ -7,10 +7,18 @@ class RangedWeapon extends Weapon {
   RangedWeapon( int weapon ) {
     super( weapon );
     shotsFired = new ArrayList<Projectile>();
-    speed = 5;
+    speed = grid_size;
   }
   
   void shoot( float x, float y ) {
-     shotsFired.add( new Projectile( x, y, speed ) );
+     Projectile p = new Projectile( x, y, speed );
+     p.reset( (int) pos.x, (int) pos.y );
+     shotsFired.add( p );
+  }
+  
+  void draw() {
+     for(Projectile p : shotsFired) {
+       p.draw(); 
+     }
   }
 }

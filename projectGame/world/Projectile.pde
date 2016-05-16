@@ -4,6 +4,7 @@ class Projectile extends GameObject {
   private PVector dest;
   private int speed;
   private float rotation;
+  private PImage img;
   
   Projectile( float x, float y, int s ) {
     dest = new PVector();
@@ -11,13 +12,13 @@ class Projectile extends GameObject {
     dest.y = y;
     dest.normalize();
     speed = s;
-    rotation = dest.angleBetween( new PVector( 0, 1 ), dest );
   }
   
   void draw() {
+    rectMode( CENTER );
     rotate( rotation );
-    
-    //imageMode( CENTER );
+    fill( 255 );
+    rect( pos.x, pos.y, 20, 5 );
     
     pos.x += dest.x * speed;
     pos.y += dest.y * speed;
