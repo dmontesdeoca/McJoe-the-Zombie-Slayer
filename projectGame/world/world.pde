@@ -615,7 +615,6 @@ void dungeonLevel(){
     if(CURRENTSTATE == 0){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
-                                                                                  // coins = new Coin[5]; // maybe do for the rest?
     }
     else if(CURRENTSTATE == 3){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
