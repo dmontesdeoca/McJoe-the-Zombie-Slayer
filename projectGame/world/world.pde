@@ -67,7 +67,12 @@ void draw() {
         image(screen, 0, 0, WIDTH, LENGTH);        
         drawLevel();
         displayHealth();
+        checkMcJoeAttacked();
         frame++;
+    }
+    else if ( state == END || state == GAMEOVER) {
+      imageMode(CORNERS);
+      image(screen, 0, 0, WIDTH, LENGTH);
     }
   }
 } // draw()
@@ -338,6 +343,21 @@ void setDungeon() {
           switch ( value ) {
             case "2":
               mcJoe.reset( x * grid_size, y * grid_size );
+              break;
+            case "5":
+              map.setValue( x, y, "0" );
+              break;
+            case "6":
+              map.setValue( x, y, "0" );
+              break;
+            case "7":
+              map.setValue( x, y, "0" );
+              break;
+            case "8":
+              map.setValue( x, y, "0" );
+              break;
+            case "9":
+              map.setValue( x, y, "0" );
               break;
         } // switch
       } 
@@ -636,6 +656,11 @@ void drawLevel(){ // from the draw battle
       }
       
       if(state == BATTLE){
+        if(mcJoe.getHitPoints() <= 0){
+          state = GAMEOVER;
+          screen = loadImage("../Graphics/gameOver.png");
+        }
+        
         if(CURRENTSTATE == 0){
             zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -704,7 +729,8 @@ void drawLevel(){ // from the draw battle
             zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             if ( zombieQ.getHitPoints() <= 0 ) {
-              //The End
+              state = END;
+              screen = loadImage("../Graphics/theEnd.png");
             }
             zombieQ.draw();
             mcJoe.draw();
@@ -776,6 +802,46 @@ void displayHealth() {
     }
     noFill();
   }
+}
+
+void checkMcJoeAttacked() {
+    if ( CURRENTSTATE == 0 ) {
+         if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombie.getPos().x + grid_size, zombie.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 1 );
+         }
+         if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieF.getPos().x + grid_size, zombieF.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 1 );
+         }
+        }
+        else if(CURRENTSTATE == 3){
+          if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieMM.getPos().x + grid_size, zombieMM.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 2 );
+         }
+         if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieMF.getPos().x + grid_size, zombieMF.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 2 );
+         }
+        }
+        else if(CURRENTSTATE == 2){
+          if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombie.getPos().x + grid_size, zombie.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 1 );
+         }
+         if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieMF.getPos().x + grid_size, zombieMF.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 2 );
+         }
+        }
+        else if(CURRENTSTATE == 1){
+          if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieF.getPos().x + grid_size, zombieF.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 1 );
+         }
+         if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieMM.getPos().x + grid_size, zombieMM.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 2 );
+         }
+        }
+        else if(CURRENTSTATE == 4){
+          if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombieQ.getPos().x + grid_size, zombieQ.getPos().y + grid_size ) < grid_size * 2 ) {
+             mcJoe.damage( 4 );
+         }
+        }
 }
 
 void checkAttackHit( float x, float y ) {

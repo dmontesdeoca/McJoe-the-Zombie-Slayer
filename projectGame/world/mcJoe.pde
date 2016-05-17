@@ -10,7 +10,20 @@ class Player extends GameCharacter {
     //default image for mcJoe is a bat
     super( map, "2", WEAPON );        
     this.map = map;
-    this.weapon = new Sword();
+    switch ( WEAPON ) {
+      case SWORD:
+        this.weapon = new Sword();
+        break;
+      case BAT:
+        this.weapon = new Bat();
+        break;
+      case BOW:
+        this.weapon = new RangedWeapon();
+        break;
+      case GUN:
+        this.weapon = new RangedWeapon();
+        break;
+    }
   }
   
   void draw() {
@@ -77,7 +90,7 @@ class Player extends GameCharacter {
   }
   
   void levelUp() {
-    hitPoints += 25; 
+    hitPoints += 100; 
   }
   
   void upgradeWeapon() {

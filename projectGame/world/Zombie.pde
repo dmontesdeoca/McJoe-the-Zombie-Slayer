@@ -17,8 +17,10 @@ class Zombie extends GameCharacter {
   void draw() {
      super.draw();
      
-     if ( state == BATTLE && pos.dist( mcJoeLocation, pos ) > grid_size * 3 ) {
-       chase(); 
+     if ( state == BATTLE && pos.dist( mcJoeLocation, pos ) > grid_size ) {
+       if ( !damaged ) {
+         chase();
+       }
      }
      else if ( state == DUNGEON ) {
        if ( frame % 10 == 0 ) {

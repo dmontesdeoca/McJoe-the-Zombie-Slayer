@@ -3,12 +3,12 @@ class Sword extends MeleeWeapon {
   
   Sword() {
     super(); 
-    damage = 10;
+    damage = 2;
   }
   
   void upgrade() {
     super.upgrade();
-    damage += 5;
+    damage += 2;
   }
   
   int getDamage() {
