@@ -21,6 +21,8 @@ Zombie zombieQ;
 Coin[] coins;
 int countCoins = 0;
 
+Heart heart;
+
 
 Map map;
 Hole hole;
@@ -239,6 +241,8 @@ void setWorld(){
             case "9":
               zombieQ.reset( x * grid_size, y * grid_size );
               break;
+            case "10":
+              heart =  new Heart(x,y);
         } // switch
       } 
     }  
@@ -365,7 +369,14 @@ void checkCollision() {//  also check for coins
                }
       }
   }
-  // HERE IT CHECKS IF IT HAS EVERYTHING REQUIERD IN ORDER TO MOVE TO THE NEXT LEVEL
+  // check heart collision, if it collides upgrade
+  if(heart.getPos().x == mcJoe.getPos().x && heart.getPos().y == mcJoe.getPos().y){
+               mcJoe.levelUp();
+               heart = new Heart(-1,-1); // get rid of the coin when mcJoe collects
+               
+  }
+  
+  // checks if everything is met in order to move up the level
   if(hole.getPos().x == mcJoe.getPos().x && hole.getPos().y == mcJoe.getPos().y && hole_access == true){
                CURRENTSTATE++;
                COIN_COLLECTED = 0;
@@ -516,6 +527,7 @@ void drawLevel(){ // from the draw battle
           hole.draw();
           mcJoe.draw();
           drawCoin();
+          heart.draw();
 
         }
         else if(CURRENTSTATE == 3){
@@ -527,7 +539,8 @@ void drawLevel(){ // from the draw battle
           hole.draw();
           mcJoe.draw();
           drawCoin();
-
+          heart.draw();
+          
         }
         else if(CURRENTSTATE == 2){
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
@@ -538,6 +551,8 @@ void drawLevel(){ // from the draw battle
           hole.draw();
           mcJoe.draw();
           drawCoin();
+          heart.draw();
+
 
         }
         else if(CURRENTSTATE == 1){
@@ -549,13 +564,14 @@ void drawLevel(){ // from the draw battle
           hole.draw();
           mcJoe.draw();
           drawCoin();
+          heart.draw();
+
 
         }
         else if(CURRENTSTATE == 4){
           zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombieQ.draw();
-          hole.draw();
           mcJoe.draw();
           drawCoin();
 
@@ -569,7 +585,6 @@ void drawLevel(){ // from the draw battle
       
             zombie.draw();
             zombieF.draw();
-            hole.draw();
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 3){
@@ -578,7 +593,6 @@ void drawLevel(){ // from the draw battle
       
             zombieMM.draw();
             zombieMF.draw();
-            hole.draw();
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
@@ -587,7 +601,6 @@ void drawLevel(){ // from the draw battle
       
             zombie.draw();
             zombieMF.draw();
-            hole.draw();
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 1){
@@ -596,14 +609,12 @@ void drawLevel(){ // from the draw battle
       
             zombieF.draw();
             zombieMM.draw();
-            hole.draw();
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 4){
             zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieQ.draw();
-            hole.draw();
             mcJoe.draw();
         }
       }
@@ -611,25 +622,34 @@ void drawLevel(){ // from the draw battle
 
 // sets zombies accordoring to the current state
 void dungeonLevel(){
-    mcJoe = new Player( map );
+
     if(CURRENTSTATE == 0){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
+<<<<<<< HEAD
+=======
+      mcJoe = new Player( map );
+                                                                                  // coins = new Coin[5]; // maybe do for the rest?
+>>>>>>> origin/master
     }
     else if(CURRENTSTATE == 3){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
+      mcJoe.setMap(map);
     }
     else if(CURRENTSTATE == 2){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
+      mcJoe.setMap(map);
     }
     else if(CURRENTSTATE == 1){
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
+      mcJoe.setMap(map);
     }
     else if(CURRENTSTATE == 4){
       zombieQ = new Zombie( map, ZOMBIE_Q, ZOM_Q);
+      mcJoe.setMap(map);
     }
 } // dungeonLevel()
 
