@@ -4,8 +4,8 @@ class Bat extends MeleeWeapon {
     super( BAT ); 
   }
   
-  void upgrade( int coins ) {
-    super.upgrade( coins );
-    damage += 20 * coins; 
+  void upgrade() {
+    super.upgrade();
+    damage += 20; 
   }
 }

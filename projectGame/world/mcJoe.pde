@@ -3,7 +3,6 @@ int WEAPON = 0;
 class Player extends GameCharacter {
   
   Weapon weapon;
-  int hitPoints;
 
   /** Player constructor **/
   
@@ -15,7 +14,6 @@ class Player extends GameCharacter {
     
     this.map = map;
     this.weapon = new Sword();
-    hitPoints = 100;
   }
   
   void draw() {
@@ -78,7 +76,11 @@ class Player extends GameCharacter {
   }
   
   void levelUp() {
-    hitPoints += 10; 
+    hitPoints += 25; 
+  }
+  
+  void upgradeWeapon() {
+    weapon.upgrade();
   }
   
 } //Player class

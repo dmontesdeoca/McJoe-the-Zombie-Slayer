@@ -4,7 +4,6 @@ class Projectile extends GameObject {
   private PVector dest;
   private int speed;
   private float rotation;
-  private PImage img;
   
   Projectile( float x, float y, int s ) {
     dest = new PVector();

@@ -19,8 +19,8 @@ class Weapon extends GameObject {
     attack = true;
   }
   
-  void upgrade( int coins ) {
-    exp += coins;
+  void upgrade() {
+    exp++;
   }
   
   int getDamage() {

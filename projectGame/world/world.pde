@@ -70,6 +70,7 @@ void draw() {
         imageMode(CORNERS);
         image(screen, 0, 0, WIDTH, LENGTH);        
         drawLevel();
+        displayHealth();
         frame++;
     }
   }
@@ -354,6 +355,7 @@ void checkCollision() {//  also check for coins
   //check collision with coins if it over laps count up the coin count and get it to -1 -1
   for(int i = 0; i < COIN_GOAL; i++){
       if(coins[i].getPos().x == mcJoe.getPos().x && coins[i].getPos().y == mcJoe.getPos().y){
+               mcJoe.upgradeWeapon();
                COIN_COLLECTED++;
                System.out.println(COIN_COLLECTED);
                coins[i] = new Coin(-1,-1); // get rid of the coin when mcJoe collects
@@ -528,29 +530,28 @@ void drawLevel(){ // from the draw battle
 
         }
         else if(CURRENTSTATE == 2){
-          mcJoe.draw();
           zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
  
           zombie.draw();
           zombieMF.draw();
           hole.draw();
+          mcJoe.draw();
           drawCoin();
 
         }
         else if(CURRENTSTATE == 1){
-          mcJoe.draw();
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
           zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
 
           zombieF.draw();
           zombieMM.draw();
           hole.draw();
+          mcJoe.draw();
           drawCoin();
 
         }
         else if(CURRENTSTATE == 4){
-          mcJoe.draw();
           zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           zombieQ.draw();
@@ -581,25 +582,24 @@ void drawLevel(){ // from the draw battle
             mcJoe.draw();
         }
         else if(CURRENTSTATE == 2){
-            mcJoe.draw();
             zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombie.draw();
             zombieMF.draw();
             hole.draw();
+            mcJoe.draw();
         }
         else if(CURRENTSTATE == 1){
-            mcJoe.draw();
             zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
             zombieMM.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieF.draw();
             zombieMM.draw();
             hole.draw();
+            mcJoe.draw();
         }
         else if(CURRENTSTATE == 4){
-            mcJoe.draw();
             zombieQ.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
             zombieQ.draw();
@@ -611,7 +611,7 @@ void drawLevel(){ // from the draw battle
 
 // sets zombies accordoring to the current state
 void dungeonLevel(){
-    mcJoe = new Player( map);
+    mcJoe = new Player( map );
     if(CURRENTSTATE == 0){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
@@ -621,7 +621,7 @@ void dungeonLevel(){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
-    else if(CURRENTSTATE ==2){
+    else if(CURRENTSTATE == 2){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieMF = new Zombie( map, ZOMBIE_MF, ZOM_MF);
     }
@@ -638,4 +638,34 @@ void drawCoin(){
           for(int i = 0; i < 5; i++){
             coins[i].draw();// maybe do for the rest
           }
+}
+
+void displayHealth() {
+  if ( state == BATTLE ) {
+    textSize( grid_size / 2 );
+    fill( 255, 0, 0 );
+    text( "mcJoe: " + mcJoe.getHitPoints() , grid_size / 2, grid_size );
+    fill( 0, 255, 0 );
+    if(CURRENTSTATE == 0){
+      text( "Male Zombie: " + zombie.getHitPoints() , grid_size / 2, grid_size * 2 );
+      text( "Memale Zombie: " + zombieF.getHitPoints() , grid_size / 2, grid_size * 3);
+    }
+    else if(CURRENTSTATE == 3){
+      text( "Mutated Male Zombie: " + zombieMM.getHitPoints() , grid_size / 2, grid_size * 2 );
+      text( "Mutated Female Zombie: " + zombieMF.getHitPoints() , grid_size / 2, grid_size * 3);
+
+    }
+    else if(CURRENTSTATE == 2){
+      text( "Male Zombie: " + zombie.getHitPoints() , grid_size / 2, grid_size * 2 );
+      text( "Mutated Female Zombie: " + zombieMF.getHitPoints() , grid_size / 2, grid_size * 3);
+    }
+    else if(CURRENTSTATE == 1){
+      text( "Female Zombie: " + zombieF.getHitPoints() , grid_size / 2, grid_size * 2 );
+      text( "Mutated Male Zombie: " + zombieMM.getHitPoints() , grid_size / 2, grid_size * 3);
+    }
+    else if(CURRENTSTATE == 4){
+      text( "Zombie Queen: " + zombieQ.getHitPoints() , grid_size / 2, grid_size * 2 );
+    }
+    noFill();
+  }
 }
