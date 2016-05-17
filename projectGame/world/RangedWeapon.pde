@@ -4,8 +4,8 @@ class RangedWeapon extends Weapon {
    private ArrayList<Projectile> shotsFired;
    protected int speed;
   
-  RangedWeapon( int weapon ) {
-    super( weapon );
+  RangedWeapon() {
+    super();
     shotsFired = new ArrayList<Projectile>();
     speed = grid_size;
   }

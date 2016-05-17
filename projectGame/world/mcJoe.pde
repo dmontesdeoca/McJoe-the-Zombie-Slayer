@@ -87,4 +87,8 @@ class Player extends GameCharacter {
     weapon.upgrade();
   }
   
+  int getWeaponDamage() {
+    return weapon.getDamage(); 
+  }
+  
 } //Player class

@@ -461,6 +461,7 @@ void mouseClicked() {
   }
   else if ( state == BATTLE ) {
     mcJoe.attack( mouseX, mouseY ); 
+    checkAttackHit( mouseX, mouseY );
   }
 } // mouseClicked()
 
@@ -626,11 +627,7 @@ void dungeonLevel(){
     if(CURRENTSTATE == 0){
       zombie = new Zombie( map, ZOMBIE_M, ZOM_M);
       zombieF = new Zombie( map, ZOMBIE_F, ZOM_F);
-<<<<<<< HEAD
-=======
       mcJoe = new Player( map );
-                                                                                  // coins = new Coin[5]; // maybe do for the rest?
->>>>>>> origin/master
     }
     else if(CURRENTSTATE == 3){
       zombieMM = new Zombie( map, ZOMBIE_MM, ZOM_MM);
@@ -662,7 +659,7 @@ void drawCoin(){
 void displayHealth() {
   if ( state == BATTLE ) {
     textSize( grid_size / 2 );
-    fill( 255, 0, 0 );
+    fill( 255 );
     text( "mcJoe: " + mcJoe.getHitPoints() , grid_size / 2, grid_size );
     fill( 0, 255, 0 );
     if(CURRENTSTATE == 0){
@@ -687,4 +684,141 @@ void displayHealth() {
     }
     noFill();
   }
+}
+
+void checkAttackHit( float x, float y ) {
+  if (  WEAPON == SWORD || WEAPON == BAT ) {
+     if ( x >= mcJoe.getPos().x + grid_size ) {
+       if ( CURRENTSTATE == 0 ) {
+         if ( ( ( zombie.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombie.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombie.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombie.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombie.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombie.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombie.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombie.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombie.damage( mcJoe.getWeaponDamage() );
+         }
+         if ( ( ( zombieF.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieF.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieF.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieF.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 3){
+         if ( ( ( zombieMM.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieMM.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieMM.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieMM.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieMM.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMM.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMM.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMM.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMM.damage( mcJoe.getWeaponDamage() );
+         }
+         if ( ( ( zombieMF.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieMF.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieMF.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieMF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieMF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMF.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 2){
+          if ( ( ( zombie.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombie.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombie.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombie.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombie.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombie.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombie.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombie.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombie.damage( mcJoe.getWeaponDamage() );
+         }
+          if ( ( ( zombieMF.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieMF.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieMF.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieMF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieMF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMF.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 1){
+          if ( ( ( zombieF.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieF.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieF.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieF.damage( mcJoe.getWeaponDamage() );
+         }
+         if ( ( ( zombieMM.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieMM.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieMM.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieMM.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieMM.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMM.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMM.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMM.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMM.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 4){
+          if ( ( ( zombieQ.getPos().x < mcJoe.getPos().x + grid_size * 5 && zombieQ.getPos().x > mcJoe.getPos().x + grid_size ) || 
+           ( zombieQ.getPos().x + grid_size * 2 > mcJoe.getPos().x + grid_size && zombieQ.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size * 5 ) ) &&
+           ( ( zombieQ.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieQ.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieQ.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieQ.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieQ.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+     }
+     else {
+       if ( CURRENTSTATE == 0 ) {
+         if ( ( ( zombie.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombie.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombie.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombie.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombie.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombie.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombie.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombie.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombie.damage( mcJoe.getWeaponDamage() );
+         }
+         if ( ( ( zombieF.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieF.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieF.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieF.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 3){
+         if ( ( ( zombieMM.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieMM.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieMM.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieMM.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieMM.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMM.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMM.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMM.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMM.damage( mcJoe.getWeaponDamage() );
+         }
+         if ( ( ( zombieMF.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieMF.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieMF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieMF.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieMF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMF.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 2){
+          if ( ( ( zombie.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombie.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombie.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombie.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombie.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombie.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombie.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombie.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombie.damage( mcJoe.getWeaponDamage() );
+         }
+          if ( ( ( zombieMF.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieMF.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieMF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieMF.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieMF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMF.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 1){
+          if ( ( ( zombieF.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieF.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieF.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieF.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieF.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieF.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieF.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieF.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieF.damage( mcJoe.getWeaponDamage() );
+         }
+         if ( ( ( zombieMM.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieMM.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieMM.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieMM.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieMM.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieMM.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieMM.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieMM.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieMM.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+        else if(CURRENTSTATE == 4){
+          if ( ( ( zombieQ.getPos().x > mcJoe.getPos().x - grid_size * 4 && zombieQ.getPos().x < mcJoe.getPos().x + grid_size ) || 
+           ( zombieQ.getPos().x + grid_size * 2 < mcJoe.getPos().x + grid_size && zombieQ.getPos().x + grid_size * 2 > mcJoe.getPos().x - grid_size * 4 ) ) &&
+           ( ( zombieQ.getPos().y < mcJoe.getPos().y + grid_size * 2 && zombieQ.getPos().y > mcJoe.getPos().y - grid_size * 2 ) || 
+           ( zombieQ.getPos().y + grid_size * 2 > mcJoe.getPos().y - grid_size * 2 && zombieQ.getPos().y + grid_size * 2 < mcJoe.getPos().y + grid_size * 2 ) ) ) {
+             zombieQ.damage( mcJoe.getWeaponDamage() );
+         }
+        }
+     }
+   }
 }

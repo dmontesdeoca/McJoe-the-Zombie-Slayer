@@ -1,11 +1,10 @@
 
 class Weapon extends GameObject {
   
-  protected PImage wpnImg;
   protected boolean attack;
   protected int damage, exp;
   
-  Weapon( int weapon ) {
+  Weapon() {
     super(); 
     state = BATTLE;
     exp = 0;

@@ -2,16 +2,16 @@
 class Sword extends MeleeWeapon {
   
   Sword() {
-    super( SWORD ); 
+    super(); 
     damage = 10;
   }
   
   void upgrade() {
     super.upgrade();
-    damage += 10;
+    damage += 5;
   }
   
   int getDamage() {
-    return super.getDamage() + ( (int) random( 0, 2 ) == 0 ? 10 * (int) random( 1, exp + 1 ) : 0 );
+    return super.getDamage() + ( (int) random( 0, 2 ) == 0 ? 5 * (int) random( 1, exp + 1 ) : 0 );
   }
 }

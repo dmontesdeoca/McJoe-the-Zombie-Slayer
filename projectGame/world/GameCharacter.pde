@@ -15,9 +15,11 @@ class GameCharacter extends GameObject {
   
   protected boolean jump;
   protected boolean fall;
+  protected boolean damaged;
   protected PVector beforeJump;
   protected ArrayList<Integer> vel;
   protected int hitPoints;
+  protected int damageFrame;
   
   GameCharacter( Map map, String ID, int character) {
     super();
@@ -26,10 +28,10 @@ class GameCharacter extends GameObject {
     //this.charImg = charImg;
     fall = false;
     jump = false;
+    damaged = false;
     beforeJump = new PVector();
     vel = new ArrayList<Integer>();
     chooseCharacter(character);
-    hitPoints = 100;
   }
   
   void setMap( Map map ) {
@@ -88,9 +90,18 @@ class GameCharacter extends GameObject {
   
   void draw() {
     
+    if ( damaged ) {
+      tint( 255, 0, 0 ); 
+      damageFrame++;
+      if ( damageFrame >= 15 ) {
+        damaged = false;
+      }
+    }
+    
     imageMode(CORNER);
     image(charImg, pos.x, pos.y, ( state == DUNGEON ? grid_size : grid_size * 2 ), ( state == DUNGEON ? grid_size : grid_size * 2 ) );
     
+    noTint();
     if ( state == BATTLE ) {
       if ( jump ) {
         pos.y -= grid_size / 2;
@@ -143,28 +154,30 @@ void chooseCharacter(int charImage){
            }
                 else if(charImage == ZOMBIE_F){
                         charImg = loadImage("../Graphics/battle/zombieFemale.png");
-                        hitPoints = 100;
+                        hitPoints = 200;
                 }
                       else if(charImage == ZOMBIE_M){
                               charImg = loadImage("../Graphics/battle/zombieMale.png");
-                              hitPoints = 100;
+                              hitPoints = 200;
                       }
                             else if(charImage == ZOMBIE_MF){
                                     charImg = loadImage("../Graphics/battle/zombieFemaleM.png");
-                                    hitPoints = 150;
+                                    hitPoints = 300;
                             }
                                   else if(charImage == ZOMBIE_MM){
                                           charImg = loadImage("../Graphics/battle/zombieMaleM.png");
-                                          hitPoints = 150;
+                                          hitPoints = 300;
                                   }
                                         else if(charImage == ZOMBIE_Q){
                                                 charImg = loadImage("../Graphics/battle/zombieQueen.png");
-                                                hitPoints = 200;
+                                                hitPoints = 400;
                                         }   
   }
   
   int getHitPoints() { return hitPoints; }
   void damage( int damage ) {
     hitPoints -= damage;
+    damageFrame = 0;
+    damaged = true;
   }
 } // chooseCharacter()

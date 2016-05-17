@@ -4,8 +4,8 @@ class MeleeWeapon extends Weapon {
   protected boolean left, right;
   protected int attackFrame;
   
-  MeleeWeapon( int weapon ) {
-    super( weapon );
+  MeleeWeapon() {
+    super();
     left = false;
     right = false;
     attackFrame = 0;

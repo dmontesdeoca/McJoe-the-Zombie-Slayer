@@ -5,7 +5,6 @@ static final String ZOM_MM = "8";
 static final String ZOM_Q = "9";
 
 class Zombie extends GameCharacter {
-  int frame = 0;
   String move;
   boolean inSight = false;
   PVector mcJoeLocation; // mcJoes current location
@@ -18,7 +17,7 @@ class Zombie extends GameCharacter {
   void draw() {
      super.draw();
      
-     if ( state == BATTLE && pos.dist( mcJoeLocation, pos ) > grid_size * 4 ) {
+     if ( state == BATTLE && pos.dist( mcJoeLocation, pos ) > grid_size * 3 ) {
        chase(); 
      }
      else if ( state == DUNGEON ) {
@@ -31,7 +30,6 @@ class Zombie extends GameCharacter {
            }
        }
     }
-     frame++;
   } // draw()
   
   void makeRandomMove() { // call make move in the world
