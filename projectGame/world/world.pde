@@ -50,11 +50,6 @@ void setup() {
 void draw() {
   // TEST make sure
   if ( running ) {
-      // TEST make sure that for each level it swaps accordingly 
-   /* if(frame == 300 || frame == 600 || frame == 900 || frame == 1200){
-      CURRENTSTATE++;
-      setWorld();
-    }*/
     if( state == MAIN ){
        updateMouse(mouseX, mouseY);
       if(weaponPicked){ // if a weapon was clicked set state to dungeon and set world accordingly
@@ -208,8 +203,12 @@ void setWorld(){
     coins = new Coin[5];
     dungeonLevel();
     
-    if(CURRENTSTATE == 0 ||CURRENTSTATE == 1 || CURRENTSTATE == 2 || CURRENTSTATE == 3 || CURRENTSTATE == 4){
+    if(CURRENTSTATE == 0 || CURRENTSTATE == 2 || CURRENTSTATE == 4){
       screen = loadImage( "../Graphics/map/mapOne.jpg" );
+    }
+    else if(CURRENTSTATE == 1 || CURRENTSTATE == 3){
+     screen = loadImage( "../Graphics/map/mapOne_B.jpg" );
+
     }
     
       for ( int x = 0; x < map.getMaxX(); x++ ) {
