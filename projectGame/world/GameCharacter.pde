@@ -8,6 +8,8 @@ static final int ZOMBIE_MF = 7;
 static final int ZOMBIE_MM = 8;
 static final int ZOMBIE_Q = 9;
 
+//GameCharacter class is a GameObject
+//Base Class for any playable and non-playable character in the game
 class GameCharacter extends GameObject {
   protected Map map;
   protected String ID;
@@ -21,6 +23,8 @@ class GameCharacter extends GameObject {
   protected int hitPoints;
   protected int damageFrame;
   
+  //Calls super constructor
+  //Initializes variables
   GameCharacter( Map map, String ID, int character) {
     super();
     this.ID = ID;
@@ -34,13 +38,16 @@ class GameCharacter extends GameObject {
     chooseCharacter(character);
   }
   
+  //Sets the map used by the GameCharacter object
   void setMap( Map map ) {
     this.map = map;
   }
   
+  //Moves GameCharacter object
   void kick( int direction ) {
+    //GameCharacter object moves depending on the map's free space. 1 represents wall, 0 represents free space
     if ( state == DUNGEON ) {
-      map.setValue( ( int )( pos.x / grid_size ), ( int ) ( pos.y / grid_size ), "0" );
+      map.setValue( ( int )( pos.x / grid_size ), ( int ) ( pos.y / grid_size ), "0" ); 
       switch( direction ) {
         case NORTH:
           if ( map.getValue( ( int )( pos.x / grid_size ), ( int ) ( ( pos.y - grid_size ) / grid_size ) ).equals( "0" ) ) {
@@ -65,17 +72,17 @@ class GameCharacter extends GameObject {
       } // switch
       map.setValue( ( int )( pos.x / grid_size ), ( int ) ( pos.y / grid_size ), ID );
     }
+    //BATTLE state movements
     else {
       switch( direction ) {
         case NORTH:
+          //Handles jumping
           if ( !jump && !fall ) {
             jump = true;
             beforeJump.y = pos.y;
           }
           break;
-        case SOUTH:
-          //jump.y += grid_size * 4;
-          break;
+          //Handles movements using event queue
         case WEST:
           vel.add( grid_size / -2 );
           break;
@@ -86,10 +93,12 @@ class GameCharacter extends GameObject {
     }
   }
   
+  //Returns GameCharacter ID
   String getID() { return ID; }
   
   void draw() {
     
+    //Tints character red for 15 frames when damaged
     if ( damaged ) {
       tint( 255, 0, 0 ); 
       damageFrame++;
@@ -98,10 +107,13 @@ class GameCharacter extends GameObject {
       }
     }
     
+    //draws character image
     imageMode(CORNER);
     image(charImg, pos.x, pos.y, ( state == DUNGEON ? grid_size : grid_size * 2 ), ( state == DUNGEON ? grid_size : grid_size * 2 ) );
     
     noTint();
+    
+    //Controls BATTLE state movements
     if ( state == BATTLE ) {
       if ( jump ) {
         pos.y -= grid_size / 2;
@@ -134,7 +146,7 @@ class GameCharacter extends GameObject {
     }
   } // draw()
   
-  //choose the character
+//choose the character image
 void chooseCharacter(int charImage){
     if(charImage == SWORD){
         charImg = loadImage("../Graphics/battle/sword.png");
@@ -174,10 +186,13 @@ void chooseCharacter(int charImage){
                                         }   
   }
   
+  //Returns amount of life left
   int getHitPoints() { return hitPoints; }
+  
+  //Call to deal damage to this GameCharacter
   void damage( int damage ) {
     hitPoints -= damage;
     damageFrame = 0;
     damaged = true;
   }
-} // chooseCharacter()
+} //GameCharacter class

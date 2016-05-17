@@ -1,9 +1,11 @@
 
+//Class MeleeWeapon is a Weapon for close range combat
 class MeleeWeapon extends Weapon {
   
   protected boolean left, right;
   protected int attackFrame;
   
+  //Calls super constructor and initializes value
   MeleeWeapon() {
     super();
     left = false;
@@ -11,6 +13,7 @@ class MeleeWeapon extends Weapon {
     attackFrame = 0;
   }
   
+  //Draws area of attack from melee weapon when in BATTLE state
   void draw() {
      if ( state == BATTLE && attack ) {
        if ( right ) {
@@ -36,6 +39,7 @@ class MeleeWeapon extends Weapon {
      }
   }
   
+  //Prepares right attack
   void attackRight() {
     right = true;
     left = false;
@@ -43,6 +47,7 @@ class MeleeWeapon extends Weapon {
     attack();
   }
   
+  //Prepares left attack
   void attackLeft() {
     left = true;
     right = false;

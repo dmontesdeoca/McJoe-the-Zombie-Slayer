@@ -1,5 +1,6 @@
 int WEAPON = 0;
 
+//Player class is the playable GameCharacter
 class Player extends GameCharacter {
   
   Weapon weapon;
@@ -7,7 +8,6 @@ class Player extends GameCharacter {
   /** Player constructor **/
   
   Player( Map map ) {
-    //default image for mcJoe is a bat
     super( map, "2", WEAPON );        
     this.map = map;
     switch ( WEAPON ) {
@@ -26,6 +26,7 @@ class Player extends GameCharacter {
     }
   }
   
+  //Calls super class' draw and resets weapon position to player location
   void draw() {
     if ( state == BATTLE ) {
       if ( !keyPressed && !jump && !fall) {
@@ -37,6 +38,7 @@ class Player extends GameCharacter {
     weapon.draw();
   }
   
+  //Player definition of kick includes ability to move on to areas of the map with other values representing coins, health, etc...
   void kick( int direction ) {
     super.kick( direction );
     if ( state == DUNGEON ) {
@@ -75,6 +77,7 @@ class Player extends GameCharacter {
     }
   }
   
+  //Attacks in direction of x and y
   void attack( float x, float y ) {
     if ( weapon instanceof MeleeWeapon ) {
       if ( x >= pos.x + grid_size ) {
@@ -85,18 +88,21 @@ class Player extends GameCharacter {
       }
     }
     else {
-       ( (RangedWeapon) weapon ).shoot( x, y );
+       ( (RangedWeapon) weapon ).shoot( x, y ); //Draft class implementation
     }
   }
   
+  //Increases health by 100
   void levelUp() {
     hitPoints += 100; 
   }
   
+  //Calls weapon's upgrade function
   void upgradeWeapon() {
     weapon.upgrade();
   }
   
+  //Calls weapon's getDamage function
   int getWeaponDamage() {
     return weapon.getDamage(); 
   }

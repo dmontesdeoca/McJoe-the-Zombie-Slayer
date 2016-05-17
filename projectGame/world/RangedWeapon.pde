@@ -1,4 +1,5 @@
 
+//Draft object
 class RangedWeapon extends Weapon {
  
    private ArrayList<Projectile> shotsFired;

@@ -1,4 +1,5 @@
 
+//Draft object
 class Projectile extends GameObject {
   
   private PVector dest;

@@ -4,16 +4,18 @@ static final String ZOM_MF = "7";
 static final String ZOM_MM = "8";
 static final String ZOM_Q = "9";
 
+//Enemy class of this game
 class Zombie extends GameCharacter {
   String move;
   boolean inSight = false;
   PVector mcJoeLocation; // mcJoes current location
   
+  //Calls super constructor
   Zombie( Map map , int typeZombie, String zombieKind) {
     super( map, zombieKind, typeZombie );
-    pos = new PVector( 0, 0 ); // start bottom left corner
   }
   
+  //Class super class's draw function adding AI to the zombie agents
   void draw() {
      super.draw();
      
@@ -32,15 +34,16 @@ class Zombie extends GameCharacter {
            }
        }
     }
-  } // draw()
+  } 
   
-  void makeRandomMove() { // call make move in the world
+  //Makes a random move in any of 4 directions
+  void makeRandomMove() { 
     int direction = ( int ) random( 0, 4 );
     
     super.kick( direction );
   }
 
-
+  
   void checkSight(PVector location){
     mcJoeLocation = new PVector(location.x, location.y);
      if((mcJoeLocation.x > pos.x - (grid_size * 7) && mcJoeLocation.x < pos.x + (grid_size * 7))  && 

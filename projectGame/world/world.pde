@@ -774,6 +774,7 @@ void drawCoin(){
           }
 }// drzawCloin()
 
+//Displays all GameCharacter objects hit points
 void displayHealth() {
   if ( state == BATTLE ) {
     textSize( grid_size / 2 );
@@ -804,6 +805,7 @@ void displayHealth() {
   }
 }
 
+//Check if mcJoe is being attacked
 void checkMcJoeAttacked() {
     if ( CURRENTSTATE == 0 ) {
          if ( dist( mcJoe.getPos().x + grid_size, mcJoe.getPos().y + grid_size, zombie.getPos().x + grid_size, zombie.getPos().y + grid_size ) < grid_size * 2 ) {
@@ -844,6 +846,7 @@ void checkMcJoeAttacked() {
         }
 }
 
+//Check if mcJoe's attack hit a zombie in BATTLE state
 void checkAttackHit( float x, float y ) {
   if (  WEAPON == SWORD || WEAPON == BAT ) {
      if ( x >= mcJoe.getPos().x + grid_size ) {
