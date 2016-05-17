@@ -8,10 +8,7 @@ class Player extends GameCharacter {
   
   Player( Map map ) {
     //default image for mcJoe is a bat
-    super( map, "2", WEAPON );    
-              
-    //ellipseMode(CORNERS);
-    
+    super( map, "2", WEAPON );        
     this.map = map;
     this.weapon = new Sword();
   }

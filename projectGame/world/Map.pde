@@ -26,7 +26,7 @@ String[][] mapArr;
                     else if(CURRENTSTATE == 4){
                          reader = createReader("../Maps/map5.stdin");
                     }
-  }
+  } // Map()
 
 // reads the map text file into an array
 void read() {

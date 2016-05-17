@@ -11,6 +11,7 @@ int frame = 0;
 
 boolean running; // flag set to true while the game is running
 Player mcJoe; // player
+
 // zombies
 Zombie zombie;
 Zombie zombieF;
@@ -22,7 +23,6 @@ Coin[] coins;
 int countCoins = 0;
 
 Heart heart;
-
 
 Map map;
 Hole hole;
@@ -37,7 +37,6 @@ boolean bow = false;
 boolean gun = false;
 boolean bat = false;
 boolean weaponPicked = false;
-
 
 void setup() {
   frameRate( 30 );
@@ -76,7 +75,6 @@ void draw() {
 /** this function is called when the user releases a key.
     the arrow keys act like giving the player (mcJoe) a kick in the direction of the arrow.
      and when q or Q is pressed it will quit the game **/
-
 void keyReleased() {
   if ( state == DUNGEON ) {
     if ( key == CODED ) {
@@ -187,7 +185,7 @@ void keyPressed() {
   }
 } // keyPressed()
 
-// sets world according to what state the game is in
+// sets world according to what state the game is in MAIN or DUNGEON
 void setWorld(){ 
   if(state == MAIN){
          screen = loadImage( "../Graphics/mainScreen.png" );
@@ -208,9 +206,9 @@ void setWorld(){
     }
     else if(CURRENTSTATE == 1 || CURRENTSTATE == 3){
      screen = loadImage( "../Graphics/map/mapOne_B.jpg" );
-
     }
     
+    // depending on the value in the map we set the PVector for each object 
       for ( int x = 0; x < map.getMaxX(); x++ ) {
         for ( int y = 0; y < map.getMaxY(); y++ ) {
           String value = map.getValue( x, y );
@@ -245,10 +243,9 @@ void setWorld(){
         } // switch
       } 
     }  
+    // rest countCoins for future use
     countCoins = 0;
-
   }
-  
 } // setWorld()
 
 void setBattle() {
@@ -256,7 +253,7 @@ void setBattle() {
   screen = loadImage( "../Graphics/battle/battle.png" );
   mcJoe.setState( BATTLE );
   
-  // for zombie create a zombiefunction depending on each level
+  // set battles depending on which state it is on
   if(CURRENTSTATE == 0){
     zombie.setState( BATTLE );
     zombieF.setState( BATTLE );
@@ -303,11 +300,9 @@ void setBattle() {
 } // setBattle()
 
 void setDungeon() {
-  state = DUNGEON;
-  
+  state = DUNGEON;  
   mcJoe.setState( DUNGEON );
   
-  // for zombie create a zombiefunction depending on each level
   if(CURRENTSTATE == 0){
     screen = loadImage( "../Graphics/map/mapOne.jpg" );
     zombie.setState( DUNGEON );
@@ -354,7 +349,7 @@ void drawWorld(){
     image(screen, 0, 0, WIDTH, LENGTH); 
 } // drawWorld()
 
-void checkCollision() {//  also check for coins
+void checkCollision() {
   
   for ( int direction = 0; direction < 4; direction++ ) {
     switch( direction ) {
@@ -406,9 +401,8 @@ void checkCollision() {//  also check for coins
       if(coins[i].getPos().x == mcJoe.getPos().x && coins[i].getPos().y == mcJoe.getPos().y){
                mcJoe.upgradeWeapon();
                COIN_COLLECTED++;
-               System.out.println(COIN_COLLECTED);
-               coins[i] = new Coin(-1,-1); // get rid of the coin when mcJoe collects
-               
+               coins[i] = new Coin(-1,-1); // gets rid of the coin when mcJoe collects
+               // if all coins are collected we set acess to the hole true
                if(COIN_COLLECTED == COIN_GOAL){
                  hole_access = true;
                }
@@ -418,15 +412,14 @@ void checkCollision() {//  also check for coins
   if(heart.getPos().x == mcJoe.getPos().x && heart.getPos().y == mcJoe.getPos().y){
                mcJoe.levelUp();
                heart = new Heart(-1,-1); // get rid of the coin when mcJoe collects
-               
   }
   
   // checks if everything is met in order to move up the level
   if(hole.getPos().x == mcJoe.getPos().x && hole.getPos().y == mcJoe.getPos().y && hole_access == true){
-               CURRENTSTATE++;
-               COIN_COLLECTED = 0;
-               hole_access = false;
-               setWorld();
+               CURRENTSTATE++;       // moves to the next state
+               COIN_COLLECTED = 0;   // resets coins collected for the new map
+               hole_access = false;  // resets hole access to false
+               setWorld();           // resets world to the next state
   }
    
 }
@@ -482,6 +475,7 @@ boolean overButton(int x, int y, int width, int height)  {
   else { return false; }
 } // overButton()
 
+
 // depending where the mouse was pressed the weapon would be choosen
 // weapon is picked so make it true
 void mouseClicked() {
@@ -510,6 +504,7 @@ void mouseClicked() {
   }
 } // mouseClicked()
 
+// highlights if the mouse is over the button
 void buttonHighLight(){
   //put in a function called highlight button
       if (sword){
@@ -565,7 +560,7 @@ void buttonHighLight(){
 void drawLevel(){ // from the draw battle
       if(state == DUNGEON){
         if(CURRENTSTATE == 0){
-          zombie.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
+          zombie.checkSight(mcJoe.getPos());  // checks if it is int the line of sight if it it will move towards mcjoe
           zombieF.checkSight(mcJoe.getPos()); // checks if it is int the line of sight if it it will move towards mcjoe
       
           if ( zombie.getHitPoints() > 0 ) {
@@ -717,7 +712,7 @@ void drawLevel(){ // from the draw battle
       }
 } // drawLevel()
 
-// sets zombies accordoring to the current state
+// sets zombies accordoring to the current state and set mcJoe to current map
 void dungeonLevel(){
 
     if(CURRENTSTATE == 0){
@@ -746,11 +741,12 @@ void dungeonLevel(){
     }
 } // dungeonLevel()
 
+// draw coins
 void drawCoin(){
           for(int i = 0; i < 5; i++){
-            coins[i].draw();// maybe do for the rest
+            coins[i].draw();
           }
-}
+}// drzawCloin()
 
 void displayHealth() {
   if ( state == BATTLE ) {

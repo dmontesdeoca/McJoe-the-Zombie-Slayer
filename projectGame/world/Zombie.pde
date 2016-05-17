@@ -48,7 +48,7 @@ class Zombie extends GameCharacter {
      else
         inSight = false;
         
-  }
+  } // checkSight()
   
   
  // if mcJoe is in the zombies sight, the zombie will chase mcJoe
@@ -67,5 +67,5 @@ class Zombie extends GameCharacter {
       super.kick( SOUTH );
     }
     
-  }
-}
+  } // chase()
+} // class Zombie
