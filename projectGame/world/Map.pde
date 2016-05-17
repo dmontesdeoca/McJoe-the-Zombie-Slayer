@@ -1,4 +1,4 @@
-int CURRENTSTATE = 2;
+int CURRENTSTATE = 0;
 
 
 class Map{
