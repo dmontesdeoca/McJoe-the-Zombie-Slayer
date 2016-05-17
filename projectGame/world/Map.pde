@@ -1,8 +1,5 @@
 int CURRENTSTATE = 0;
-
-
 class Map{
- // int mapArr[][];
   
 BufferedReader reader;
 String line;
@@ -10,7 +7,7 @@ int maxX, maxY;
 String[][] mapArr;
 /** map constructor where we will create a reader to the file**/
   Map() {
-    // Open the file from the createWriter() example
+    // Open the file to the createWriter() according to CURRENTSTATE
     if(CURRENTSTATE == 0){
          reader = createReader("../Maps/map1.stdin");
     }
@@ -43,7 +40,7 @@ void read() {
     maxY = int(pieces[1]);
 
     System.out.println(x + " " + y);
-
+   // sets the string 2d array for map
    mapArr =  new String[maxX][maxY];
    for(int i = 0; i < maxY; i++){
      try {
@@ -54,7 +51,7 @@ void read() {
         line = null;
      }
      String[] piece = split(line, " ");
-
+      // plug in values from the file
      for(int j = 0; j < maxX; j++){
        mapArr[i][j] = piece[j];
      }

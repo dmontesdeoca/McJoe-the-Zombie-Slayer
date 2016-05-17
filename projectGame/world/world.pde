@@ -39,7 +39,7 @@ boolean bat = false;
 boolean weaponPicked = false;
 
 void setup() {
-  frameRate( 30 );
+  frameRate( 15 ); // the lower the number the slower it is
   size( 700, 700);
   state = MAIN;
   running = true;
@@ -50,7 +50,7 @@ void draw() {
   // TEST make sure
   if ( running ) {
     if( state == MAIN ){
-       updateMouse(mouseX, mouseY);
+       updateMouse();
       if(weaponPicked){ // if a weapon was clicked set state to dungeon and set world accordingly
         state = DUNGEON;
         setWorld(); // set world as dungeon
@@ -457,7 +457,7 @@ void createButtons(){
   batY = width - buttonSize - (grid_size*3);
 } // creatButtons()
 
-void updateMouse(int x, int y) {
+void updateMouse() {
   buttonHighLight(); // highlights if the mouse is over button
   
   if( overButton(swordX, swordY, buttonSize, buttonSize) ){ // pass sword coor
